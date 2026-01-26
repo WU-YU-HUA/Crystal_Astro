@@ -1,0 +1,108 @@
+---
+// src/components/Navbar.astro
+---
+<nav class="navbar">
+  <div class="nav-links">
+    <a href="/" class="nav-item">首頁</a>
+
+    <div class="nav-item has-dropdown">
+      <span>水晶</span>
+      <div class="dropdown-content">
+        <div class="container">
+          <ul>
+            <li><a href="PINK_URL">粉水晶</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="nav-item has-dropdown">
+      <span>能量面相</span>
+      <div class="dropdown-content">
+        <div class="container">
+          <ul>
+            <li><a href="#">愛情能量</a></li>
+            <li><a href="#">財富能量</a></li>
+            <li><a href="#">事業能量</a></li>
+            <li><a href="#">壓力能量</a></li>
+            <li><a href="#">社交能量</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<style>
+  .navbar {
+    background: #000;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    /* 移除原本的 padding: 1rem，改由子元素撐開，防止感應斷層 */
+    height: 60px; 
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+  }
+
+  .nav-links { 
+    display: flex; 
+    gap: 0; /* 改用 padding 控制間距，感應區才不會有縫隙 */
+    height: 100%; 
+    align-items: stretch; /* 讓子元素填滿高度 */
+  }
+
+  .nav-item { 
+    color: #999; 
+    cursor: pointer; 
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    padding: 0 1.5rem; /* 增加左右點擊範圍 */
+    height: 100%;    /* 撐滿整個 Bar 的高度 */
+    transition: color 0.2s;
+  }
+
+  .nav-item:hover { 
+    color: #44d62c; 
+  } 
+
+  /* 下拉選單核心邏輯 */
+  .has-dropdown { 
+    position: static; 
+    display: flex;
+    align-items: center;
+  }
+
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    top: 60px; /* 精準等於高度，確保無縫 */
+    left: 0;
+    width: 100%;
+    background: #2d2a2af2; /* 保留你的顏色 */
+    padding: 2rem 0;
+    border-top: 1px solid #44d62c;
+  }
+
+  /* 當滑鼠在整個區域（包含下拉內容）時，保持顯示 */
+  .has-dropdown:hover .dropdown-content {
+    display: block; 
+  }
+  
+  /* 這樣寫會更精準，只管 dropdown 裡面的連結 */
+  .dropdown-content a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 14px;
+    transition: color 0.2s ease;
+  }
+
+  .dropdown-content a:hover {
+    color: #44d62c;
+  }
+
+  .container { max-width: 1200px; margin: 0 auto; }
+  ul { list-style: none; display: flex; gap: 3rem; margin: 0; padding: 0; }
+</style>
