@@ -20,6 +20,6 @@ export async function GET({ request }) {
             headers: { "Content-Type": "application/json" }
         });
     } catch (error) {
-        return new Response(JSON.stringify({ error: error.message }), { status: 500 });
+        return new Response(JSON.stringify({ error: error.message, status: "Final Failed" }), { status: 500 });
     }
 }
