@@ -4,9 +4,5 @@
       "path": "/api/redeploy",
       "schedule": "5 0 * * *"
     }
-  ],
-  "deploymentProtection": {
-    "protectionMode": "standard",
-    "excludePaths": ["/api/redeploy"]
-  }
+  ]
 }
