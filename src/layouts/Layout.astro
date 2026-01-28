@@ -1,7 +1,8 @@
 ---
 // 1. 引入你的 Navbar 組件
 import Navbar from '../components/Navbar.astro';
-
+import VendorBox from '../components/Vendor_box.astro';
+// import CSS
 interface Props {
 	title?: string;
 }
@@ -26,18 +27,7 @@ const { title = "Crystal Astro" } = Astro.props;
 		<main> <!--底下為Page main-->
 			<slot />
 		</main>
-		<!--懸浮超連結框-->
-		<a href="https://myship.7-11.com.tw/general/detail/GM2601272856786" id="vendor" class="box" target="_blank" rel="noopener noreferrer">
-			<svg width="32" height="32" fill="none" xmlns="http://www.w3.org/2000/svg"
-				><path
-					d="M24.667 12c1.333 1.414 2 3.192 2 5.334 0 4.62-4.934 5.7-7.334 12C18.444 28.567 18 27.456 18 26c0-4.642 6.667-7.053 6.667-14Zm-5.334-5.333c1.6 1.65 2.4 3.43 2.4 5.333 0 6.602-8.06 7.59-6.4 17.334C13.111 27.787 12 25.564 12 22.666c0-4.434 7.333-8 7.333-16Zm-6-5.333C15.111 3.555 16 5.556 16 7.333c0 8.333-11.333 10.962-5.333 22-3.488-.774-6-4-6-8 0-8.667 8.666-10 8.666-20Z"
-					fill="#111827"></path></svg
-			>
-			<h2>挑選你的專屬能量水晶</h2>
-			<p>
-				將能量與設計融合，每一條手鍊都是日常穿搭中的低調守護。探索我們精選的水晶系列。
-			</p>
-		</a>
+		<VendorBox />
 	</body>
 </html>
 
@@ -47,44 +37,7 @@ const { title = "Crystal Astro" } = Astro.props;
 		padding: 0;
 		width: 100%;
 		min-height: 100%;
-		background-color: #000; /* Razer 風格預設黑底 */
+		background-color: #181818; /* Razer 風格預設黑底 */
 		color: white;
-	}
-
-	#vendor {
-		position: fixed;
-		bottom: 16px;
-		right: 16px;
-		z-index: 9999;
-		max-width: 300px;
-		text-decoration: none;
-		backdrop-filter: blur(50px);
-		border: 1px solid rgba(255, 255, 255, 0.4);
-	}
-
-	#vendor:hover {
-		background: rgba(255, 255, 255, 0.55);
-	}
-
-	.box {
-		padding: 16px;
-		background: rgba(255, 255, 255, 1);
-		border-radius: 16px;
-		border: 1px solid white;
-	}
-
-	a h2 {
-		margin: 0 0 1em;
-		font-weight: normal;
-		color: #111827;
-		font-size: 20px;
-	}
-
-	a p {
-		color: #4b5563;
-		font-size: 16px;
-		line-height: 24px;
-		letter-spacing: -0.006em;
-		margin: 0;
 	}
 </style>
