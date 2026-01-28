@@ -3,7 +3,7 @@ export const prerender = false; // 強制此 API 為動態執行，不進行預�
 import type { APIRoute } from "astro";
 
 export const GET: APIRoute = async ({request}) => {
-    const API_URL = "https://api.vercel.com/v1/integrations/deploy/prj_I7A0fdp3WcRRzsacqwbRZOBi2lzx/AmfK6DdrM8"
+    const API_URL = import.meta.env.DEPLOY_URL
 
     //檢查是不是Vercel 發送的請求
     const authHeader = request.headers.get('authorization');
