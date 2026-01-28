@@ -5,6 +5,12 @@ import type { APIRoute } from "astro";
 export const GET: APIRoute = async ({request}) => {
     const API_URL = "https://api.vercel.com/v1/integrations/deploy/prj_I7A0fdp3WcRRzsacqwbRZOBi2lzx/AmfK6DdrM8"
 
+    //檢查是不是Vercel 發送的請求
+    const authHeader = request.headers.get('authorization');
+    if (authHeader !== `Bearer ${import.meta.env.CRON_SECRET}`) { //Setting in Vercel Environment
+        return new Response("Unauthorized", { status: 401 });
+    }
+
     try{
         const res = await fetch(API_URL, {method: 'POST'})
 

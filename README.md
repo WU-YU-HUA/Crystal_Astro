@@ -49,3 +49,14 @@ Feel free to check [our documentation](https://docs.astro.build) or jump into ou
 ## Design
 
 製作Navbar as Razer
+
+## Vercel Auto Deploy with Cron Job
+
+npm install @types/node --save-dev
+-> 讓 .ts 能夠認出 process.env / 直接使用import.meta.env
+
+在src/pages/底下創建新的URL
+e.g. src/pages/XXX.ts
+然後在root 新建vercel.json
+
+安全性: 在Vercel 設置 Environment variable, CRON_ SECRET
