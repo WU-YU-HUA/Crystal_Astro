@@ -12,7 +12,14 @@ export const GET: APIRoute = async ({request}) => {
     }
 
     try{
-        const res = await fetch(API_URL, {method: 'POST'})
+        const res = await fetch(API_URL, {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${import.meta.env.VERCEL_TOKEN}`,
+                    'Content-Type': 'application/json'
+                }
+            }
+        )
 
         return new Response(
             JSON.stringify({
