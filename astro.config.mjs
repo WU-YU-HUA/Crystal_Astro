@@ -1,8 +1,10 @@
-// astro.config.mjs
 import { defineConfig } from 'astro/config';
-import vercel from '@astrojs/vercel'; // 確保已安裝此套件
+import vercel from '@astrojs/vercel';
 
 export default defineConfig({
-    output: 'server', // 必須開啟 server 模式才能執行 API
-    adapter: vercel(),
+  output: 'server', // 必須保留，否則 API 無法運作
+  adapter: vercel({
+    functionPerRoute: true, // 核心：將 API 拆分成獨立 Function
+    edge: false, // 確保使用標準 Serverless Functions
+  }),
 });
