@@ -48,6 +48,7 @@ Feel free to check [our documentation](https://docs.astro.build) or jump into ou
 
 ## Design
 
+src/components/Navbar.astro
 製作Navbar as Razer
 
 ## Vercel Auto Deploy with Cron Job
@@ -60,3 +61,11 @@ e.g. src/pages/XXX.ts
 然後在root 新建vercel.json
 
 安全性: 在Vercel 設置 Environment variable, CRON_ SECRET
+
+## 彈跳式超連結
+<a href="https://myship.7-11.com.tw/general/detail/GM2601272856786" 
+id="vendor" 
+class="box" 
+target="_blank" 
+rel="noopener noreferrer">
+--> target: 彈跳式, rel: 安全性

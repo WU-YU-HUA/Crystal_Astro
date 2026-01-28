@@ -1,11 +1,125 @@
 ---
-import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+const res = await fetch('https://e-closet-backend.onrender.com/api/agent/daily_horoscope/');
+const data = await res.json()
+
+const horo_list = data?.result || [];
 ---
 
 <Layout title="Crystal Tutorial">
-	<Welcome />
+	<div id="container">
+		<main>
+			<div class="horoscope-list">
+				<h2>星座運勢總覽</h2>
+				{horo_list.map((item: any) => (
+                    <div class="zodiac-card">
+                        <h3>{item.Zodiac}</h3>
+						<h4>今日幸運色:{item.LuckColor}</h4>
+                        <p>{item.Overall.Desc}</p>
+                    </div>
+                ))}
+			</div>
+		</main>		
+	</div>
 </Layout>
+
+<style>
+	main {
+		color: #ffffff;
+		height: 100%;
+		display: flex;
+		justify-content: center;
+	}
+	main h2 {
+		color: #b388ff;
+		font-size: 2.5rem;
+		font-weight: 700; /*字體粗度*/
+		text-align: center;
+		margin-bottom: 1rem;
+		/* 增加紫色發光效果，營造星雲感 */ 
+		text-shadow: 0 0 15px #b388ff99; 
+    	letter-spacing: 2px;
+	}
+	main h3 {
+		color: #ffd700; /* 金色，象徵恆星與能量 */
+		font-size: 1.8rem;
+		margin-bottom: 0.5rem;
+		display: flex;
+		align-items: center;
+		gap: 10px;
+	}
+	main h3::before {
+		content: "✦";
+		color: #b388ff;
+		font-size: 1.2rem;
+	}
+	main h4 {
+		color: #a2c0ff; /* 月光藍 */
+		font-size: 1.2rem;
+		text-shadow: 0 0 10px #a2c0ff80;
+	}
+	main p {
+		color: #e0e0e0; /* 接近白的淺灰，提升閱讀舒適度 */
+		line-height: 1.8;
+		font-size: 1.05rem;
+		font-weight: 300;
+	}
+
+	#background {
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		z-index: -1;
+		filter: blur(100px);
+	}
+
+	#container {
+		font-family: Inter, Roboto, 'Helvetica Neue', 'Arial Nova', 'Nimbus Sans', Arial, sans-serif;
+		height: 100%;
+	}
+
+	h1 {
+		font-size: 22px;
+		margin-top: 0.25em;
+	}
+
+	@media screen and (max-height: 368px) {
+		#vendor {
+			display: none;
+		}
+	}
+
+	@media screen and (max-width: 768px) {
+		#container {
+			display: flex;
+			flex-direction: column;
+		}
+
+		#hero {
+			display: block;
+			padding-top: 10%;
+		}
+
+		#links {
+			flex-wrap: wrap;
+		}
+
+		#links a.button {
+			padding: 14px 18px;
+		}
+
+		#vendor {
+			right: 16px;
+			left: 16px;
+			bottom: 2.5rem;
+			max-width: 100%;
+		}
+
+		h1 {
+			line-height: 1.5;
+		}
+	}
+</style>
