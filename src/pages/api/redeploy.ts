@@ -1,4 +1,4 @@
-export const prerender = false; // 強制此 API 為動態執行，不進行預渲染
+// export const prerender = false; // 強制此 API 為動態執行，不進行預渲染
 
 import type { APIRoute } from "astro";
 

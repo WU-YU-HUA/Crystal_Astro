@@ -4,8 +4,10 @@ import vercel from '@astrojs/vercel';
 
 export default defineConfig({
     adapter: vercel({
-        // 關鍵設定：強制讓每個路由生成獨立的 Function
+        // 確保這兩項設定同時存在
         functionPerRoute: true, 
+        // 強制使用獨立 Function 的策略
+        deploymentStrategy: 'static', 
         webAnalytics: {
             enabled: true,
         },
