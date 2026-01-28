@@ -1,28 +1,25 @@
-export default async function handler(req, res) {
-    // 原生環境必須使用 process.env，不能用 import.meta.env
+export const prerender = false; // 強制不使用預渲染
+
+export async function GET({ request }) {
     const API_URL = process.env.DEPLOY_URL;
     const CRON_SECRET = process.env.CRON_SECRET;
 
-    // 1. 檢查變數是否抓得到 (這是 500 錯誤最常見的原因)
     if (!API_URL) {
-      return res.status(500).json({ error: "Missing DEPLOY_URL in environment" });
+      return new Response("No API URL", {status: 400})
     }
-
-    // 2. 驗證身分 (你直接輸入網址時，因為沒帶 Header，這步會回傳 401，這是正常的)
-    const authHeader = req.headers['authorization'];
+    // 驗證 Vercel Cron 身份
+    const authHeader = request.headers.get('authorization');
     if (authHeader !== `Bearer ${CRON_SECRET}`) {
-      return res.status(401).send('Unauthorized');
+        return new Response("Unauthorized", { status: 401 });
     }
 
     try {
-      // 3. 執行請求
-      const fetchRes = await fetch(API_URL, { method: 'POST' });
-      
-      return res.status(200).json({ 
-        success: true, 
-        upstreamStatus: fetchRes.status 
-      });
-    } catch (err) {
-      return res.status(500).json({ success: false, message: err.message });
+        const res = await fetch(API_URL, { method: 'POST' });
+        return new Response(JSON.stringify({ success: true, status: res.status }), {
+            status: 200,
+            headers: { "Content-Type": "application/json" }
+        });
+    } catch (error) {
+        return new Response(JSON.stringify({ error: error.message }), { status: 500 });
     }
 }
