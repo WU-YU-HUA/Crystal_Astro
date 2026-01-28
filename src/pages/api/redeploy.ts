@@ -6,10 +6,10 @@ export const GET: APIRoute = async ({request}) => {
     const API_URL = import.meta.env.DEPLOY_URL
 
     //檢查是不是Vercel 發送的請求
-    const authHeader = request.headers.get('authorization');
-    if (authHeader !== `Bearer ${import.meta.env.CRON_SECRET}`) { //Setting in Vercel Environment
-        return new Response("Unauthorized", { status: 401 });
-    }
+    // const authHeader = request.headers.get('authorization');
+    // if (authHeader !== `Bearer ${import.meta.env.CRON_SECRET}`) { //Setting in Vercel Environment
+    //     return new Response("Unauthorized", { status: 401 });
+    // }
 
     try{
         const res = await fetch(API_URL, {
