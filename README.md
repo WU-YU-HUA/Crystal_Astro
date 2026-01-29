@@ -60,6 +60,9 @@ npm install @types/node --save-dev
 e.g. src/pages/XXX.ts
 然後在root 新建vercel.json
 
+### 千萬記得 gitignore -> .vercel/ ###
+超重要 找了1晚上的bug 都讀不到API
+
 安全性: 在Vercel 設置 Environment variable, CRON_ SECRET
 
 ## 彈跳式超連結
