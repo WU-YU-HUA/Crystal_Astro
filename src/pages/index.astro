@@ -1,9 +1,11 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import '../css/horoscope.css'
+import Layout from "../layouts/Layout.astro";
+import "../css/horoscope.css";
 
-const res = await fetch('https://e-closet-backend.onrender.com/api/agent/daily_horoscope/');
-const data = await res.json()
+const res = await fetch(
+	"https://e-closet-backend-931017863616.us-east1.run.app/api/agent/daily_horoscope/",
+);
+const data = await res.json();
 
 const horo_list = data?.result || [];
 ---
@@ -13,20 +15,23 @@ const horo_list = data?.result || [];
 		<main>
 			<div class="horoscope-list">
 				<h2>星座運勢總覽</h2>
-				{horo_list.map((item: any) => (
-                    <div class="zodiac-card">
-                        <h3>{item.Zodiac}</h3>
-						<h4>今日幸運色: {item.LuckColor.Color}
-							<span style={{ 
-								backgroundColor: item.LuckColor.Hex, 
-								padding: '2px 8px', 
-								borderRadius: '4px',
-								marginLeft: '4px'
-							}}>
-							</span>
-						</h4>
+				{
+					horo_list.map((item: any) => (
+						<div class="zodiac-card">
+							<h3>{item.Zodiac}</h3>
+							<h4>
+								今日幸運色: {item.LuckColor.Color}
+								<span
+									style={{
+										backgroundColor: item.LuckColor.Hex,
+										padding: "2px 8px",
+										borderRadius: "4px",
+										marginLeft: "4px",
+									}}
+								/>
+							</h4>
 
-						{/* <h4 style="display: flex; align-items: center; gap: 8px;">
+							{/* <h4 style="display: flex; align-items: center; gap: 8px;">
 							今日幸運色: 
 							<span style={{ 
 								backgroundColor: item.LuckColor.Hex,
@@ -39,11 +44,12 @@ const horo_list = data?.result || [];
 								{item.LuckColor.Color}
 							</span>
 						</h4> */}
-                        <p>{item.Overall.Desc}</p>
-                    </div>
-                ))}
+							<p>{item.Overall.Desc}</p>
+						</div>
+					))
+				}
 			</div>
-		</main>		
+		</main>
 	</div>
 </Layout>
 
@@ -56,10 +62,11 @@ const horo_list = data?.result || [];
 	}
 
 	#container {
-		font-family: Inter, Roboto, 'Helvetica Neue', 'Arial Nova', 'Nimbus Sans', Arial, sans-serif;
+		font-family:
+			Inter, Roboto, "Helvetica Neue", "Arial Nova", "Nimbus Sans", Arial,
+			sans-serif;
 		height: 100%;
 	}
-
 
 	@media screen and (max-height: 368px) {
 		#vendor {

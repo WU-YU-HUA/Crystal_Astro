@@ -6,22 +6,26 @@ const chapters = [
     {
         id: "wearing",
         title: "配戴指南：左右手能量法則",
-        subtitle: "水晶配戴於左手或右手，在坊間與學術界存在多種理論。本章整合「投射/吸納法則」與「人體氣場流動理論」，提供最詳盡的分析。"
+        subtitle: "水晶配戴於左手或右手，在坊間與學術界存在多種理論。本章整合「投射/吸納法則」與「人體氣場流動理論」，提供最詳盡的分析。",
+        color: "#38bdf8" // 藍色代表能量流動與氣場
     },
     {
         id: "taboos",
         title: "水晶的兼容性與搭配禁忌",
-        subtitle: "許多使用者習慣同時配戴多條手鍊，這涉及到能量場的干擾與物理硬度的衝突。"
+        subtitle: "許多使用者習慣同時配戴多條手鍊，這涉及到能量場的干擾與物理硬度的衝突。",
+        color: "#f97316" // 橘紅色代表警告與禁忌
     },
     {
         id: "maintenance",
         title: "水晶的淨化、保養與安全性",
-        subtitle: "水晶如同能量的海綿，會吸附環境頻率，因此定期的「消磁淨化」與「充電」是必要的。錯誤的淨化方法可能導致礦石永久性損壞。"
+        subtitle: "水晶如同能量的海綿，會吸附環境頻率，因此定期的「消磁淨化」與「充電」是必要的。錯誤的淨化方法可能導致礦石永久性損壞。",
+        color: "#2dd4bf" // 水綠色代表純淨與洗滌
     },
     {
         id: "zodiac",
         title: "星座、數字與水晶的對應",
-        subtitle: "除了直覺選擇，許多使用者希冀透過占星學或靈數來選擇命定水晶。"
+        subtitle: "除了直覺選擇，許多使用者希冀透過占星學或靈數來選擇命定水晶。",
+        color: "#a855f7" // 紫色代表靈性與占星
     }
 ];
 ---
@@ -34,6 +38,7 @@ const chapters = [
                 <button 
                     class={`knowledge-tab ${index === 0 ? 'active' : ''}`}
                     data-target={chapter.id}
+                    style={`--theme-color: ${chapter.color}`}
                 >
                     {chapter.title}
                 </button>
@@ -43,7 +48,7 @@ const chapters = [
         <!-- Content Area -->
         <main class="knowledge-content-container">
             <!-- Chapter 4 -->
-            <div id="wearing" class="knowledge-pane active">
+            <div id="pane-wearing" class="knowledge-pane active" style="--theme-color: #38bdf8">
                 <h2 class="knowledge-title">配戴指南：左手與右手的能量法則</h2>
                 <p class="knowledge-subtitle">水晶配戴於左手或右手，在坊間與學術界存在多種理論。本章整合「投射/吸納法則」與「人體氣場流動理論」，提供最詳盡的分析。</p>
 
@@ -156,7 +161,7 @@ const chapters = [
             </div>
 
             <!-- Chapter 5 -->
-            <div id="taboos" class="knowledge-pane">
+            <div id="pane-taboos" class="knowledge-pane" style="--theme-color: #f97316">
                 <h2 class="knowledge-title">水晶的兼容性與搭配禁忌</h2>
                 <p class="knowledge-subtitle">許多使用者習慣同時配戴多條手鍊，這涉及到能量場的干擾與物理硬度的衝突。</p>
 
@@ -210,7 +215,7 @@ const chapters = [
             </div>
 
             <!-- Chapter 6 -->
-            <div id="maintenance" class="knowledge-pane">
+            <div id="pane-maintenance" class="knowledge-pane" style="--theme-color: #2dd4bf">
                 <h2 class="knowledge-title">水晶的淨化、保養與安全性</h2>
                 <p class="knowledge-subtitle">水晶如同能量的海綿，會吸附環境頻率，因此定期的「消磁淨化」與「充電」是必要的。然而，錯誤的淨化方法可能導致礦石永久性損壞。</p>
 
@@ -310,7 +315,7 @@ const chapters = [
             </div>
 
             <!-- Chapter 7 -->
-            <div id="zodiac" class="knowledge-pane">
+            <div id="pane-zodiac" class="knowledge-pane" style="--theme-color: #a855f7">
                 <h2 class="knowledge-title">星座、數字與水晶的對應</h2>
                 <p class="knowledge-subtitle">除了直覺選擇，許多使用者希冀透過占星學或靈數來選擇命定水晶。</p>
 
@@ -371,7 +376,7 @@ const chapters = [
             tabPanes.forEach(pane => pane.classList.remove('active'));
 
             const targetBtn = document.querySelector(`.knowledge-tab[data-target="${targetId}"]`);
-            const targetPane = document.getElementById(targetId);
+            const targetPane = document.getElementById(`pane-${targetId}`);
 
             if (targetBtn && targetPane) {
                 targetBtn.classList.add('active');
@@ -385,7 +390,7 @@ const chapters = [
                 const targetId = button.getAttribute('data-target');
                 if (targetId) {
                     activateTab(targetId);
-                    window.location.hash = targetId;
+                    history.pushState(null, null, '#' + targetId);
                 }
             });
         });
@@ -393,7 +398,7 @@ const chapters = [
         // Handle initial load with hash
         if (window.location.hash) {
             const hash = window.location.hash.substring(1);
-            if (document.getElementById(hash)) {
+            if (document.getElementById(`pane-${hash}`)) {
                 activateTab(hash);
             }
         }
@@ -401,7 +406,7 @@ const chapters = [
         // Handle hash changes (e.g. from navbar)
         window.addEventListener('hashchange', () => {
             const hash = window.location.hash.substring(1);
-            if (document.getElementById(hash)) {
+            if (document.getElementById(`pane-${hash}`)) {
                 activateTab(hash);
             }
         });
