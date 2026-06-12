@@ -1,0 +1,409 @@
+---
+import Layout from '../layouts/Layout.astro';
+import '../css/knowledge.css';
+
+const chapters = [
+    {
+        id: "wearing",
+        title: "配戴指南：左右手能量法則",
+        subtitle: "水晶配戴於左手或右手，在坊間與學術界存在多種理論。本章整合「投射/吸納法則」與「人體氣場流動理論」，提供最詳盡的分析。"
+    },
+    {
+        id: "taboos",
+        title: "水晶的兼容性與搭配禁忌",
+        subtitle: "許多使用者習慣同時配戴多條手鍊，這涉及到能量場的干擾與物理硬度的衝突。"
+    },
+    {
+        id: "maintenance",
+        title: "水晶的淨化、保養與安全性",
+        subtitle: "水晶如同能量的海綿，會吸附環境頻率，因此定期的「消磁淨化」與「充電」是必要的。錯誤的淨化方法可能導致礦石永久性損壞。"
+    },
+    {
+        id: "zodiac",
+        title: "星座、數字與水晶的對應",
+        subtitle: "除了直覺選擇，許多使用者希冀透過占星學或靈數來選擇命定水晶。"
+    }
+];
+---
+
+<Layout title="水晶知識與指南 | Crystal Astro">
+    <div class="knowledge-container">
+        <!-- Sidebar Tabs -->
+        <aside class="knowledge-sidebar">
+            {chapters.map((chapter, index) => (
+                <button 
+                    class={`knowledge-tab ${index === 0 ? 'active' : ''}`}
+                    data-target={chapter.id}
+                >
+                    {chapter.title}
+                </button>
+            ))}
+        </aside>
+
+        <!-- Content Area -->
+        <main class="knowledge-content-container">
+            <!-- Chapter 4 -->
+            <div id="wearing" class="knowledge-pane active">
+                <h2 class="knowledge-title">配戴指南：左手與右手的能量法則</h2>
+                <p class="knowledge-subtitle">水晶配戴於左手或右手，在坊間與學術界存在多種理論。本章整合「投射/吸納法則」與「人體氣場流動理論」，提供最詳盡的分析。</p>
+
+                <div class="knowledge-section">
+                    <h3>核心理論一：投射性與吸納性 (Projective vs. Receptive)</h3>
+                    <p>這是西方晶石療法中最主流的分類方式，依據水晶能量的流動方向來決定配戴位置。</p>
+                    <div class="card-grid">
+                        <div class="info-card">
+                            <h4>吸納性水晶 (Receptive Stones)</h4>
+                            <p><strong>定義：</strong>這類水晶的能量是向內收斂的，主要用於吸收外界的正面能量進入人體，或安撫內在情緒。</p>
+                            <p><strong>常見礦石：</strong>月光石、粉晶、紫水晶、藍紋瑪瑙、海藍寶、拉長石、綠幽靈、孔雀石。</p>
+                            <p><strong>配戴位置：</strong>非慣用手（對於右撇子為左手）。讓療癒波動進入體內，改變自身磁場。</p>
+                        </div>
+                        <div class="info-card">
+                            <h4>投射性水晶 (Projective Stones)</h4>
+                            <p><strong>定義：</strong>這類水晶的能量是向外放射的，主要用於增強氣場、驅逐負能量、保護或影響環境。</p>
+                            <p><strong>常見礦石：</strong>黑曜石、黑碧璽、紅碧玉、琥珀、太陽石、石榴石、鈦晶、黃水晶、虎眼石、赤鐵礦。</p>
+                            <p><strong>配戴位置：</strong>慣用手（對於右撇子為右手）。將意念與力量投射出去，展現權威或擋煞。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="knowledge-section">
+                    <h3>核心理論二：氣功與道家理論（左進右出）</h3>
+                    <p>東方傳統觀點認為人體氣場遵循「左進右出」的循環。</p>
+                    <ul>
+                        <li><strong>左手（輸入端）：</strong>若希望水晶帶來好運、財富、智慧或健康，應戴左手。例如鈦晶雖具強烈投射性，但若目的是「招財入庫」，傳統上建議戴左手。</li>
+                        <li><strong>右手（輸出端）：</strong>若希望排出體內負能量、病氣、霉運，應戴右手。例如黑曜石最典型的戴法是右手，以利排毒。</li>
+                    </ul>
+                </div>
+
+                <div class="knowledge-section">
+                    <h3>常見水晶左右手配戴建議對照表</h3>
+                    <div class="table-wrapper">
+                        <table class="knowledge-table">
+                            <thead>
+                                <tr>
+                                    <th>水晶名稱</th>
+                                    <th>主要功能</th>
+                                    <th>建議手 (右撇子)</th>
+                                    <th>理由分析</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>紫水晶</td>
+                                    <td>開發智慧、安神</td>
+                                    <td>左手</td>
+                                    <td>屬於吸納性，需讓能量進入頂輪調整思緒。</td>
+                                </tr>
+                                <tr>
+                                    <td>粉晶</td>
+                                    <td>招桃花、療癒</td>
+                                    <td>左手</td>
+                                    <td>屬於吸納性，需作用於心輪，改變自身氣質以吸引愛。</td>
+                                </tr>
+                                <tr>
+                                    <td>黑曜石</td>
+                                    <td>辟邪、擋煞</td>
+                                    <td>右手</td>
+                                    <td>屬於投射性，主要功能為防禦與排濁（左進右出）。</td>
+                                </tr>
+                                <tr>
+                                    <td>黑曜石 (貔貅)</td>
+                                    <td>招財、守財</td>
+                                    <td>左手</td>
+                                    <td>例外：貔貅為招財神獸，為求「進財」，故戴左手。</td>
+                                </tr>
+                                <tr>
+                                    <td>黃水晶</td>
+                                    <td>招偏財、自信</td>
+                                    <td>左手</td>
+                                    <td>雖具投射性，但為求財富能量「進入」生命，通常戴左手。</td>
+                                </tr>
+                                <tr>
+                                    <td>鈦晶/金髮晶</td>
+                                    <td>強力招財、霸氣</td>
+                                    <td>左手(招財)/右手(防小人)</td>
+                                    <td>多數戴左手招財；若需在職場談判中壓制對手，可改戴右手增強氣勢。</td>
+                                </tr>
+                                <tr>
+                                    <td>拉長石</td>
+                                    <td>氣場修復</td>
+                                    <td>左手</td>
+                                    <td>屬吸納性，修復自身氣場破洞。</td>
+                                </tr>
+                                <tr>
+                                    <td>海藍寶</td>
+                                    <td>溝通、表達</td>
+                                    <td>左手</td>
+                                    <td>調整喉輪頻率，改善內在溝通模式。</td>
+                                </tr>
+                                <tr>
+                                    <td>綠幽靈</td>
+                                    <td>正財、事業</td>
+                                    <td>左手</td>
+                                    <td>吸引事業機會與貴人。</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="alert-box">
+                        <strong>關鍵結論：</strong>
+                        <ol>
+                            <li><strong>目的決定位置：</strong>同一顆石頭，因目的不同，配戴位置可變。</li>
+                            <li><strong>左撇子法則：</strong>若您是左撇子，慣用手為左手，則上述建議應反向操作（吸納戴右手，投射戴左手）。</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chapter 5 -->
+            <div id="taboos" class="knowledge-pane">
+                <h2 class="knowledge-title">水晶的兼容性與搭配禁忌</h2>
+                <p class="knowledge-subtitle">許多使用者習慣同時配戴多條手鍊，這涉及到能量場的干擾與物理硬度的衝突。</p>
+
+                <div class="knowledge-section">
+                    <h3>五行與能量屬性衝突</h3>
+                    <ul>
+                        <li><strong>火水不容（Fire vs. Water）：</strong>具有強烈火能量的水晶（如紅瑪瑙、紅寶石、石榴石、太陽石）不宜與強烈水能量的水晶（如海藍寶、月光石、青金石）大量混戴。可能導致情緒起伏過大，忽冷忽熱，或能量相互抵銷失效。</li>
+                        <li><strong>能量方向衝突（提神 vs. 安神）：</strong>避免將極度提神的水晶（如鈦晶、黃水晶）與極度鎮靜的水晶（如藍紋瑪瑙、紫雲母）同時配戴。這會讓神經系統接收矛盾訊號，導致疲憊或焦慮。</li>
+                    </ul>
+                </div>
+
+                <div class="knowledge-section">
+                    <h3>物理硬度衝突</h3>
+                    <p>這是常被忽視但至關重要的一點。水晶的莫氏硬度（Mohs Hardness）差異會導致磨損。</p>
+                    <p>石英家族（白水晶、紫水晶、黃水晶）硬度為 7。螢石硬度僅 4，磷灰石硬度 5，方解石硬度 3，孔雀石硬度 3.5-4。</p>
+                    <div class="alert-box warning">
+                        <strong>⚠️ 警告：</strong>切勿將硬度 7 的水晶與硬度 4 以下的水晶串在同一條手鍊上，或戴在同一隻手上碰撞。軟的石頭會迅速表面霧化、刮傷甚至碎裂。
+                    </div>
+                </div>
+
+                <div class="knowledge-section">
+                    <h3>睡眠配戴禁忌</h3>
+                    <p>睡眠是潛意識活躍、能量場開放的時刻，水晶的選擇需極為謹慎。</p>
+                    <div class="card-grid">
+                        <div class="info-card warning-card">
+                            <h4>絕對禁止配戴入睡</h4>
+                            <ul>
+                                <li><strong>高頻活性石：</strong>鈦晶、黃水晶、金髮晶、紅寶石。會刺激神經系統，引發失眠或睡醒後極度疲憊。</li>
+                                <li><strong>黑曜石：</strong>能量沉重且具投射性，部分人戴著睡覺會引發夢魘，建議置於床底或床頭櫃而非身上。</li>
+                            </ul>
+                        </div>
+                        <div class="info-card safe-card">
+                            <h4>適合助眠的水晶</h4>
+                            <ul>
+                                <li><strong>溫和系：</strong>紫水晶、月光石、拉長石、白水晶（需編程為安撫模式）。</li>
+                                <li><strong>最佳選擇：</strong>透石膏、藍紋瑪瑙、紫鋰輝石。頻率極為柔和，能編織安穩的能量網。</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="knowledge-section">
+                    <h3>特殊場所禁忌</h3>
+                    <p><strong>醫院與喪葬場所：</strong>這些場所充滿病氣與哀傷的低頻能量。</p>
+                    <ul>
+                        <li><strong>建議：</strong>務必配戴高防護性水晶（黑曜石、黑碧璽）。</li>
+                        <li><strong>嚴禁：</strong>配戴吸納性強且無防護功能的石頭（如粉晶、月光石），它們可能會吸附環境中的負面情緒。</li>
+                        <li><strong>事後處理：</strong>離開後必須立即對水晶進行深層淨化，以免將穢氣帶回家。</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Chapter 6 -->
+            <div id="maintenance" class="knowledge-pane">
+                <h2 class="knowledge-title">水晶的淨化、保養與安全性</h2>
+                <p class="knowledge-subtitle">水晶如同能量的海綿，會吸附環境頻率，因此定期的「消磁淨化」與「充電」是必要的。然而，錯誤的淨化方法可能導致礦石永久性損壞。</p>
+
+                <div class="knowledge-section">
+                    <h3>水淨化與日曬淨化安全指南</h3>
+                    <div class="table-wrapper">
+                        <table class="knowledge-table">
+                            <thead>
+                                <tr>
+                                    <th>礦石種類</th>
+                                    <th>水淨化</th>
+                                    <th>日曬淨化</th>
+                                    <th>海鹽水</th>
+                                    <th>化學/物理原因詳解</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>石英家族 (白水晶、茶晶)</td>
+                                    <td class="safe">✅ 安全</td>
+                                    <td class="safe">✅ 安全</td>
+                                    <td class="safe">✅ 安全</td>
+                                    <td>二氧化矽結構穩定，耐酸鹼。</td>
+                                </tr>
+                                <tr>
+                                    <td>紫/粉/黃水晶</td>
+                                    <td class="safe">✅ 安全</td>
+                                    <td class="danger">❌ 禁止</td>
+                                    <td class="safe">✅ 安全</td>
+                                    <td>含錳、鐵等元素，紫外線會導致褪色。</td>
+                                </tr>
+                                <tr>
+                                    <td>透石膏 (Selenite)</td>
+                                    <td class="danger">❌ 禁止</td>
+                                    <td class="safe">✅ 安全</td>
+                                    <td class="danger">❌ 禁止</td>
+                                    <td>石膏成分，遇水會解理、溶解。</td>
+                                </tr>
+                                <tr>
+                                    <td>孔雀石 (Malachite)</td>
+                                    <td class="danger">❌ 禁止</td>
+                                    <td class="danger">❌ 禁止</td>
+                                    <td class="danger">❌ 禁止</td>
+                                    <td>遇酸性水或鹽水會釋出有毒銅離子，表面霧化。</td>
+                                </tr>
+                                <tr>
+                                    <td>黃鐵礦 / 赤鐵礦</td>
+                                    <td class="danger">❌ 禁止</td>
+                                    <td class="safe">✅ 安全</td>
+                                    <td class="danger">❌ 禁止</td>
+                                    <td>遇水與氧氣易生鏽並產生硫酸。</td>
+                                </tr>
+                                <tr>
+                                    <td>青金石 (Lapis Lazuli)</td>
+                                    <td class="danger">❌ 禁止</td>
+                                    <td class="warning">⚠️ 可(短)</td>
+                                    <td class="danger">❌ 禁止</td>
+                                    <td>多孔隙集合體，遇水易溶解或生鏽。</td>
+                                </tr>
+                                <tr>
+                                    <td>螢石 (Fluorite)</td>
+                                    <td class="warning">⚠️ 慎用</td>
+                                    <td class="danger">❌ 禁止</td>
+                                    <td class="danger">❌ 禁止</td>
+                                    <td>硬度低，易溶於酸性水，紫外線耗損熱釋光。</td>
+                                </tr>
+                                <tr>
+                                    <td>月光石、拉長石</td>
+                                    <td class="safe">✅ 安全</td>
+                                    <td class="warning">⚠️ 慎用</td>
+                                    <td class="warning">⚠️ 慎用</td>
+                                    <td>層狀結構不宜久泡鹽水。</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="knowledge-section">
+                    <h3>推薦的通用淨化法</h3>
+                    <p>鑑於許多水晶不耐水或光，以下三種方法適用於所有水晶，最為推薦：</p>
+                    <div class="card-grid">
+                        <div class="info-card">
+                            <h4>1. 晶洞 / 晶簇法</h4>
+                            <p>將水晶放置於大型紫晶洞或白水晶簇上 12-24 小時。利用晶簇強大的共振場進行能量交換與震盪，將負能甩出。</p>
+                        </div>
+                        <div class="info-card">
+                            <h4>2. 煙燻法 (Smudging)</h4>
+                            <p>使用白鼠尾草、聖木或艾草點燃後的煙霧燻繞水晶。煙霧能改變空間離子場，絕對安全且有效。</p>
+                        </div>
+                        <div class="info-card">
+                            <h4>3. 月光法</h4>
+                            <p>滿月前後將水晶置於窗邊沐浴月光。月光是反射的太陽光，性質柔和，能為所有水晶補充能量而不傷色澤。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chapter 7 -->
+            <div id="zodiac" class="knowledge-pane">
+                <h2 class="knowledge-title">星座、數字與水晶的對應</h2>
+                <p class="knowledge-subtitle">除了直覺選擇，許多使用者希冀透過占星學或靈數來選擇命定水晶。</p>
+
+                <div class="knowledge-section">
+                    <h3>十二星座推薦水晶</h3>
+                    <div class="card-grid">
+                        <div class="info-card">
+                            <h4>🔥 火象 (牡羊、獅子、射手)</h4>
+                            <p><strong>需求：</strong>增強執行力與財富。</p>
+                            <p><strong>推薦：</strong>黃水晶、琥珀、石榴石、紅碧玉、虎眼石。</p>
+                        </div>
+                        <div class="info-card">
+                            <h4>🌍 土象 (金牛、處女、摩羯)</h4>
+                            <p><strong>需求：</strong>增強靈活性與放鬆。</p>
+                            <p><strong>推薦：</strong>綠幽靈、孔雀石、苔蘚瑪瑙、黑碧璽。</p>
+                        </div>
+                        <div class="info-card">
+                            <h4>💨 風象 (雙子、天秤、水瓶)</h4>
+                            <p><strong>需求：</strong>增強溝通穩定度與專注。</p>
+                            <p><strong>推薦：</strong>海藍寶、藍紋瑪瑙、拉長石、天青石、螢石。</p>
+                        </div>
+                        <div class="info-card">
+                            <h4>💧 水象 (巨蟹、天蠍、雙魚)</h4>
+                            <p><strong>需求：</strong>增強情緒保護與直覺。</p>
+                            <p><strong>推薦：</strong>月光石、紫水晶、粉晶、黑曜石 (保護敏感體質)。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="knowledge-section">
+                    <h3>生命靈數 (Life Path Number)</h3>
+                    <p>將出生年月日的數字加總至個位數。</p>
+                    <ul class="number-list">
+                        <li><span class="num">1</span> <strong>領導：</strong>石榴石、太陽石</li>
+                        <li><span class="num">2</span> <strong>合作：</strong>月光石、珍珠</li>
+                        <li><span class="num">3</span> <strong>創意：</strong>黃水晶、亞馬遜石</li>
+                        <li><span class="num">4</span> <strong>穩定：</strong>綠玉髓、黑碧璽</li>
+                        <li><span class="num">5</span> <strong>自由：</strong>海藍寶、藍紋瑪瑙</li>
+                        <li><span class="num">6</span> <strong>關懷：</strong>粉晶、紅紋石</li>
+                        <li><span class="num">7</span> <strong>真理：</strong>紫水晶、螢石</li>
+                        <li><span class="num">8</span> <strong>權力：</strong>鈦晶、金髮晶</li>
+                        <li><span class="num">9</span> <strong>大愛：</strong>拉長石、白水晶</li>
+                    </ul>
+                </div>
+            </div>
+
+        </main>
+    </div>
+</Layout>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const tabButtons = document.querySelectorAll('.knowledge-tab');
+        const tabPanes = document.querySelectorAll('.knowledge-pane');
+
+        function activateTab(targetId) {
+            tabButtons.forEach(btn => btn.classList.remove('active'));
+            tabPanes.forEach(pane => pane.classList.remove('active'));
+
+            const targetBtn = document.querySelector(`.knowledge-tab[data-target="${targetId}"]`);
+            const targetPane = document.getElementById(targetId);
+
+            if (targetBtn && targetPane) {
+                targetBtn.classList.add('active');
+                targetPane.classList.add('active');
+            }
+        }
+
+        // Handle clicks
+        tabButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const targetId = button.getAttribute('data-target');
+                if (targetId) {
+                    activateTab(targetId);
+                    window.location.hash = targetId;
+                }
+            });
+        });
+
+        // Handle initial load with hash
+        if (window.location.hash) {
+            const hash = window.location.hash.substring(1);
+            if (document.getElementById(hash)) {
+                activateTab(hash);
+            }
+        }
+
+        // Handle hash changes (e.g. from navbar)
+        window.addEventListener('hashchange', () => {
+            const hash = window.location.hash.substring(1);
+            if (document.getElementById(hash)) {
+                activateTab(hash);
+            }
+        });
+    });
+</script>
