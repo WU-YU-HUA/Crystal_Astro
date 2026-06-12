@@ -36,13 +36,13 @@
 
 .tab-button:hover {
     color: var(--theme-color, #44d62c);
-    background: color-mix(in srgb, var(--theme-color, #44d62c) 5%, transparent);
+    background: color-mix(in srgb, var(--theme-color, #44d62c) 15%, transparent);
 }
 
 .tab-button.active {
     color: var(--theme-color, #44d62c);
     border: 1px solid var(--theme-color, #44d62c);
-    background: color-mix(in srgb, var(--theme-color, #44d62c) 10%, transparent);
+    background: color-mix(in srgb, var(--theme-color, #44d62c) 20%, transparent);
     box-shadow: 0 0 10px color-mix(in srgb, var(--theme-color, #44d62c) 20%, transparent), inset 0 0 10px color-mix(in srgb, var(--theme-color, #44d62c) 10%, transparent);
 }
 
@@ -76,6 +76,11 @@
 
 .tab-pane.active {
     display: block;
+    /* 加入微妙的水晶顏色背景光暈到右側中間內容區塊，提升整體視覺質感 */
+    background: radial-gradient(circle at center, color-mix(in srgb, var(--theme-color, #44d62c) 5%, transparent) 0%, transparent 70%);
+    border-radius: 8px;
+    margin: -2.5rem;
+    padding: 2.5rem;
 }
 
 @keyframes fadeIn {
