@@ -1,0 +1,237 @@
+---
+import Layout from "../layouts/Layout.astro";
+import "../css/crystals.css";
+
+const crystals = [
+    {
+        id: "clear-quartz",
+        name: "白水晶 (Clear Quartz)",
+        color: "#ffffff",
+        alias: "別名：王者之石、療癒大師",
+        appearance: "無色透明，純淨者如水，常含雲霧或冰裂。",
+        efficacy: [
+            "白水晶被視為所有水晶中功能最廣泛的「萬用石」。它能與所有脈輪共振，主要功能在於「放大」（Amplification）與「程式化」（Programming）。",
+            "白水晶能擴大配戴者的意念設定，並增強周遭其他水晶的能量場。例如，將白水晶與紫水晶並置，能提升紫水晶的靈性頻率。",
+            "此外，白水晶簇具有強大的淨化能力，能將負面頻率轉化為中性或正面頻率，常用於替其他飾品消磁。",
+        ],
+        advice: "左右手皆可。戴左手有助於全身氣場的平衡與淨化；戴右手則有助於將清晰的意念投射到外界。",
+    },
+    {
+        id: "amethyst",
+        name: "紫水晶 (Amethyst)",
+        color: "#a855f7",
+        alias: "智慧、靈性與鎮靜",
+        appearance:
+            "因含微量鐵元素（Fe³⁺）並經輻射作用而呈現從淺紫到深紫的色調。",
+        efficacy: [
+            "**智慧與社交**：不同於粉晶招攬的「桃花」，紫水晶招攬的是「貴人」與「智慧之緣」。它能提升洞察力，幫助在複雜社交場合中保持清醒與機智。",
+            "**安神助眠**：紫水晶的頻率具有深層鎮靜作用，能平撫躁動的情緒，改善因壓力引起的失眠。然而，對於某些能量敏感體質者，紫水晶的高頻反而可能導致大腦過於活躍，這類人群不宜在睡眠時配戴。",
+            "**轉化慾望**：古希臘語 Amethystos 意為「不醉」，象徵著清醒。它有助於戒除成癮行為（如酗酒、沉迷），將低層次的肉體慾望轉化為高層次的精神追求。",
+        ],
+        advice: "屬於吸納性，需讓能量進入頂輪調整思緒，通常戴左手。",
+    },
+    {
+        id: "citrine",
+        name: "黃水晶 (Citrine)",
+        color: "#eab308",
+        alias: "財富、自信與消化系統",
+        appearance:
+            "黃色至橙黃色，致色原因通常為鐵。市面上多數鮮豔黃水晶為紫水晶經熱處理而成，天然黃水晶顏色較淡且帶煙燻感。",
+        efficacy: [
+            "**財富之石**：黃水晶主「偏財」，即非固定薪資以外的收入，如投資、獎金或創業所得。它能增強企圖心與行動力，是商人與業務人員的必備寶石。",
+            "**太陽神經叢修復**：對應胃與太陽神經叢，能改善消化系統功能。在心理層面，它能消除自我懷疑、恐懼與焦慮，建立強大的自信心。",
+        ],
+        advice: "為求財富能量「進入」生命，通常戴左手。由於能量具高度放射性與刺激性，不建議在睡覺時配戴，以免導致精神亢奮。",
+    },
+    {
+        id: "rose-quartz",
+        name: "粉晶 (Rose Quartz)",
+        color: "#f472b6",
+        alias: "別名：芙蓉晶、玫瑰石英",
+        appearance: "粉紅色，質地多呈半透明或不透明，含鈦或錳。",
+        efficacy: [
+            "粉晶是心輪的代表石，其能量柔軟而綿長。它不僅是招攬愛情的寶石，更核心的功能是「療癒情感創傷」。",
+            "它能鬆動心輪的防衛機制，釋放積壓的怨恨與悲傷，教導配戴者如何愛自己。",
+            "在人際關係中，粉晶能軟化尖銳的性格，減少衝突，增進人緣。",
+        ],
+        advice: "屬於吸納性，需作用於心輪，改變自身氣質以吸引愛，通常戴左手。粉晶具有光敏性，長時間暴露於強烈陽光下會導致褪色變白，因此應避免日曬淨化。",
+    },
+    {
+        id: "rutilated-quartz",
+        name: "髮晶與鈦晶 (Rutilated Quartz)",
+        color: "#fbbf24",
+        alias: "能量的極致增幅",
+        appearance:
+            "包含針狀礦物包裹體的水晶，能量通常比純淨水晶更為強勁。鈦晶含有板狀金紅石，金屬光澤極強。",
+        efficacy: [
+            "**強勢招財**：鈦晶同時主正財與偏財，氣場霸道，能提升決策的果斷力與領導者的威嚴，非常適合企業高管或老闆。",
+            "**辟邪化煞**：強烈的金屬反射光澤被認為能阻擋負能量與靈異干擾，常作為強效護身符。",
+            "**適應性**：由於能量過於剛烈，氣虛或脾氣暴躁者配戴可能會感到頭暈或情緒更易激動，建議循序漸進。",
+        ],
+        advice: "多數戴左手招財；若需在職場談判中壓制對手，可改戴右手增強氣勢。",
+    },
+    {
+        id: "smoky-quartz",
+        name: "茶晶 (Smoky Quartz)",
+        color: "#78350f",
+        alias: "接地與穩定",
+        appearance: "淺棕色至深黑色，受天然輻射影響而成。",
+        efficacy: [
+            "茶晶是極佳的「接地」（Grounding）寶石。它能將頂輪過剩的高頻能量導引至海底輪並排入大地。",
+            "對於思緒飄忽、容易焦慮或「不切實際」的人有極好的穩定作用。",
+            "它亦能吸收負面能量，轉化情緒壓力。",
+        ],
+        advice: "可佩戴於右手以協助排放負能量與情緒壓力。",
+    },
+    {
+        id: "moonstone",
+        name: "月光石 (Moonstone)",
+        color: "#a5b4fc",
+        alias: "陰性力量與週期循環",
+        appearance: "長石家族（Feldspar），具暈彩效應（Adularescence）。",
+        efficacy: [
+            "**情緒調節**：被稱為「戀人之石」，月光石與月亮週期緊密相連，對應女性能量。它能平撫情緒波動，特別適合緩解生理期不適或更年期症狀。",
+            "**直覺開發**：增強第六感與潛意識的連結，有助於夢境工作。",
+            "**副作用警示**：由於其高度對應情緒體，若配戴者正處於極度情緒混亂狀態，可能會引發「好轉反應」，需謹慎使用。",
+        ],
+        advice: "通常配戴於左手以接納柔和能量。需注意夢境過度活躍。",
+    },
+    {
+        id: "labradorite",
+        name: "拉長石 (Labradorite)",
+        color: "#2dd4bf",
+        alias: "轉化與氣場修復",
+        appearance: "長石家族，具拉長石暈彩（Labradorescence）。",
+        efficacy: [
+            "拉長石被視為魔法與轉化之石。它能修補氣場（Aura）中的破洞，防止能量流失。",
+            "對於過度消耗精力的工作者（如治療師、醫護人員），拉長石能提供強大的能量防護罩。",
+            "它亦能激發想像力，連結理性與直覺。",
+        ],
+        advice: "屬吸納性，修復自身氣場破洞，建議戴左手。",
+    },
+    {
+        id: "aquamarine",
+        name: "海藍寶 (Aquamarine)",
+        color: "#38bdf8",
+        alias: "勇氣與溝通",
+        appearance: "綠柱石（Beryl），含鐵致色。",
+        efficacy: [
+            "海藍寶對應喉輪，被稱為「勇氣之石」。它能幫助清理喉輪的阻塞，使溝通更加順暢、表達更加清晰。",
+            "對於需要演講、教學或談判的人來說是極佳的輔助。",
+            "在情緒上，它如海水般具有洗滌作用，能平息憤怒，化解溝通中的誤解。",
+        ],
+        advice: "調整喉輪頻率，改善內在溝通模式，建議戴左手。",
+    },
+    {
+        id: "obsidian",
+        name: "黑曜石 (Obsidian)",
+        color: "#71717a",
+        alias: "暗夜守護與深層排毒",
+        appearance: "天然火山琉璃，非晶質。",
+        efficacy: [
+            "**極致辟邪**：黑曜石具有強大的「吸納性」，能像黑洞一樣吸收病氣、濁氣與負能量。它是極佳的護身符，能防止靈異干擾與小人。",
+            "**心理映照**：它被稱為「真理之石」，能無情地反映出配戴者內心的陰暗面、恐懼與創傷，迫使人面對並療癒。",
+        ],
+        advice: "屬於投射性，主要功能為防禦與排濁（左進右出），戴右手。例外：貔貅為招財神獸，為求「進財」戴左手。",
+    },
+    {
+        id: "tigers-eye",
+        name: "虎眼石 (Tiger's Eye)",
+        color: "#d97706",
+        alias: "勇氣與行動",
+        appearance: "含有石棉纖維的石英集合體，具貓眼效應。",
+        efficacy: [
+            "虎眼石結合了太陽的能量與大地的穩定，能激發勇氣、自信與行動力。",
+            "它能幫助優柔寡斷的人做出決策，並提供心理上的保護感，特別適合創業初期或面臨重大挑戰時配戴。",
+        ],
+        advice: "配戴右手能將意念與力量投射出去，展現權威與行動力。",
+    },
+];
+---
+
+<Layout title="水晶研究指南 | Crystal Astro">
+    <div class="crystals-container">
+        <!-- Sidebar Tabs -->
+        <aside class="tabs-sidebar">
+            {
+                crystals.map((crystal, index) => (
+                    <button
+                        class={`tab-button ${index === 0 ? "active" : ""}`}
+                        data-target={crystal.id}
+                        style={`--theme-color: ${crystal.color}`}
+                    >
+                        {crystal.name}
+                    </button>
+                ))
+            }
+        </aside>
+
+        <!-- Content Area -->
+        <main class="tab-content-container">
+            {
+                crystals.map((crystal, index) => (
+                    <div
+                        id={crystal.id}
+                        class={`tab-pane ${index === 0 ? "active" : ""}`}
+                        style={`--theme-color: ${crystal.color}`}
+                    >
+                        <h2 class="crystal-title">{crystal.name}</h2>
+                        <p class="crystal-alias">{crystal.alias}</p>
+
+                        <div class="crystal-section">
+                            <h3>外觀特徵</h3>
+                            <p>{crystal.appearance}</p>
+                        </div>
+
+                        <div class="crystal-section">
+                            <h3>功效分析</h3>
+                            <ul>
+                                {crystal.efficacy.map((point) => (
+                                    <li
+                                        set:html={point.replace(
+                                            /\*\*(.*?)\*\*/g,
+                                            "<strong>$1</strong>",
+                                        )}
+                                    />
+                                ))}
+                            </ul>
+                        </div>
+
+                        <div class="crystal-section">
+                            <h3>配戴建議</h3>
+                            <p>{crystal.advice}</p>
+                        </div>
+                    </div>
+                ))
+            }
+        </main>
+    </div>
+</Layout>
+
+<script>
+    // Tab switching logic
+    document.addEventListener("DOMContentLoaded", () => {
+        const tabButtons = document.querySelectorAll(".tab-button");
+        const tabPanes = document.querySelectorAll(".tab-pane");
+
+        tabButtons.forEach((button) => {
+            button.addEventListener("click", () => {
+                // Remove active class from all buttons and panes
+                tabButtons.forEach((btn) => btn.classList.remove("active"));
+                tabPanes.forEach((pane) => pane.classList.remove("active"));
+
+                // Add active class to clicked button
+                button.classList.add("active");
+
+                // Show target pane
+                const targetId = button.getAttribute("data-target");
+                if (targetId) {
+                    const targetPane = document.getElementById(targetId);
+                    if (targetPane) {
+                        targetPane.classList.add("active");
+                    }
+                }
+            });
+        });
+    });
+</script>

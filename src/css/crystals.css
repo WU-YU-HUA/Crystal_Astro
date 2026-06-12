@@ -1,0 +1,160 @@
+/* Razer-style styling for crystals page */
+
+.crystals-container {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 2rem;
+    display: flex;
+    gap: 2rem;
+    font-family: Inter, Roboto, 'Helvetica Neue', Arial, sans-serif;
+    color: #e0e0e0;
+}
+
+/* Sidebar Tabs */
+.tabs-sidebar {
+    flex: 0 0 250px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    border-right: 1px solid #333;
+    padding-right: 1rem;
+}
+
+.tab-button {
+    background: transparent;
+    border: 1px solid transparent;
+    color: #999;
+    padding: 1rem 1.5rem;
+    text-align: left;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-radius: 4px;
+    position: relative;
+    overflow: hidden;
+}
+
+.tab-button:hover {
+    color: var(--theme-color, #44d62c);
+    background: color-mix(in srgb, var(--theme-color, #44d62c) 5%, transparent);
+}
+
+.tab-button.active {
+    color: var(--theme-color, #44d62c);
+    border: 1px solid var(--theme-color, #44d62c);
+    background: color-mix(in srgb, var(--theme-color, #44d62c) 10%, transparent);
+    box-shadow: 0 0 10px color-mix(in srgb, var(--theme-color, #44d62c) 20%, transparent), inset 0 0 10px color-mix(in srgb, var(--theme-color, #44d62c) 10%, transparent);
+}
+
+.tab-button.active::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: var(--theme-color, #44d62c);
+    box-shadow: 0 0 8px var(--theme-color, #44d62c);
+}
+
+/* Content Area */
+.tab-content-container {
+    flex: 1;
+    min-height: 500px;
+    background: #111;
+    border: 1px solid #222;
+    border-radius: 8px;
+    padding: 2.5rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    position: relative;
+}
+
+.tab-pane {
+    display: none;
+    animation: fadeIn 0.4s ease-out forwards;
+}
+
+.tab-pane.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.crystal-title {
+    color: var(--theme-color, #44d62c);
+    font-size: 2.5rem;
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+    text-shadow: 0 0 15px color-mix(in srgb, var(--theme-color, #44d62c) 40%, transparent);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.crystal-alias {
+    color: #888;
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+    font-style: italic;
+}
+
+.crystal-section {
+    margin-bottom: 2rem;
+    line-height: 1.8;
+}
+
+.crystal-section h3 {
+    color: #fff;
+    border-bottom: 1px solid #333;
+    padding-bottom: 0.5rem;
+    margin-bottom: 1rem;
+    font-size: 1.3rem;
+}
+
+.crystal-section p {
+    margin-bottom: 1rem;
+    color: #ccc;
+}
+
+.crystal-section ul {
+    padding-left: 1.5rem;
+    color: #ccc;
+}
+
+.crystal-section li {
+    margin-bottom: 0.5rem;
+}
+
+.crystal-section strong {
+    color: var(--theme-color, #44d62c);
+}
+
+/* Responsive */
+@media screen and (max-width: 768px) {
+    .crystals-container {
+        flex-direction: column;
+        padding: 0 1rem;
+    }
+    
+    .tabs-sidebar {
+        flex: none;
+        flex-direction: row;
+        overflow-x: auto;
+        border-right: none;
+        border-bottom: 1px solid #333;
+        padding-right: 0;
+        padding-bottom: 1rem;
+        white-space: nowrap;
+    }
+    
+    .tab-button.active::before {
+        width: 100%;
+        height: 4px;
+        top: auto;
+        bottom: 0;
+        left: 0;
+    }
+}
