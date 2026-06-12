@@ -197,6 +197,16 @@
     border-bottom: 1px solid #333;
 }
 
+.knowledge-table th:nth-child(2),
+.knowledge-table th:nth-child(3),
+.knowledge-table th:nth-child(4),
+.knowledge-table td:nth-child(2),
+.knowledge-table td:nth-child(3),
+.knowledge-table td:nth-child(4) {
+    min-width: 100px;
+    white-space: nowrap;
+}
+
 .knowledge-table th {
     background: #222;
     color: #fff;

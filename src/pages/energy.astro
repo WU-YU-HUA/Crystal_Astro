@@ -1,0 +1,252 @@
+---
+import Layout from '../layouts/Layout.astro';
+import '../css/knowledge.css';
+
+const chapters = [
+    {
+        id: "love",
+        title: "愛情與婚姻",
+        subtitle: "面相十二宮之「夫妻宮」：掌管感情、桃花與婚姻運勢",
+        color: "#ec4899" // 粉紅色代表愛情與浪漫
+    },
+    {
+        id: "wealth",
+        title: "財富運勢",
+        subtitle: "面相十二宮之「財帛宮」：掌管正財、偏財與聚財能力",
+        color: "#eab308" // 金黃色代表財富與豐盛
+    },
+    {
+        id: "career",
+        title: "事業與發展",
+        subtitle: "面相十二宮之「官祿宮」：掌管事業晉升、官運與領導力",
+        color: "#22c55e" // 綠色代表事業生長與正財
+    },
+    {
+        id: "stress",
+        title: "壓力與健康",
+        subtitle: "面相十二宮之「命宮與疾厄宮」：反映身心靈狀態與整體健康",
+        color: "#0ea5e9" // 天藍色代表平靜、舒緩與健康
+    },
+    {
+        id: "social",
+        title: "社交與人際",
+        subtitle: "面相十二宮之「兄弟宮與奴僕宮」：掌管同儕、貴人與部屬關係",
+        color: "#8b5cf6" // 紫色代表智慧社交與貴人相助
+    }
+];
+---
+
+<Layout title="能量面相 | Crystal Astro">
+    <div class="knowledge-container">
+        <!-- Sidebar Tabs -->
+        <aside class="knowledge-sidebar">
+            {chapters.map((chapter, index) => (
+                <button 
+                    class={`knowledge-tab ${index === 0 ? 'active' : ''}`}
+                    data-target={chapter.id}
+                    style={`--theme-color: ${chapter.color}`}
+                >
+                    {chapter.title}
+                </button>
+            ))}
+        </aside>
+
+        <!-- Content Area -->
+        <main class="knowledge-content-container">
+            <!-- Love -->
+            <div id="pane-love" class="knowledge-pane active" style="--theme-color: #ec4899">
+                <h2 class="knowledge-title">愛情與婚姻：夫妻宮</h2>
+                <p class="knowledge-subtitle">結合面相學中的「夫妻宮」與水晶能量學，提升自身魅力與感情和諧。</p>
+
+                <div class="knowledge-section">
+                    <h3>面相解析 (Face Reading)</h3>
+                    <p><strong>位置：</strong>夫妻宮（奸門）位於眼睛的尾部（魚尾）及外側太陽穴部位。</p>
+                    <ul>
+                        <li>如果此處飽滿平滑，代表感情與婚姻穩定。</li>
+                        <li>若夫妻宮凹陷，往往會給人難以親近的印象，且暗示著婚姻關係較易出現波折或不穩定，並可能連帶將眼尾與眉尾往下拉扯。</li>
+                    </ul>
+                </div>
+
+                <div class="knowledge-section">
+                    <h3>推薦水晶與應用</h3>
+                    <div class="card-grid">
+                        <div class="info-card">
+                            <h4>粉晶 / 紅紋石</h4>
+                            <p>對應心輪，能散發溫和的粉紅色光芒，增強自身魅力與桃花運。若想特別增強感情運勢並化解夫妻宮凹陷帶來的氣場阻礙，可以隨身配戴粉晶。</p>
+                            <p><strong>風水佈局：</strong>在臥室西南方、床頭等風水桃花位擺放粉水晶（如粉晶鴛鴦或粉晶樹），有助於增強伴侶間的感情與溝通。</p>
+                        </div>
+                        <div class="info-card">
+                            <h4>月光石</h4>
+                            <p>被稱為「戀人之石」，其柔和的頻率能撫平情緒並促進內在平靜，是修復感情與增進親密關係的極佳選擇。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Wealth -->
+            <div id="pane-wealth" class="knowledge-pane" style="--theme-color: #eab308">
+                <h2 class="knowledge-title">財富運勢：財帛宮</h2>
+                <p class="knowledge-subtitle">觀察鼻子的財帛宮，透過強效招財水晶來補足財氣。</p>
+
+                <div class="knowledge-section">
+                    <h3>面相解析 (Face Reading)</h3>
+                    <p><strong>位置：</strong>財帛宮主要看鼻子的部位。</p>
+                    <ul>
+                        <li>鼻頭圓潤有肉、鼻翼飽滿不外露，代表容易聚財。</li>
+                        <li>如果鼻頭尖削或氣色暗沉，可能暗示會有破財的風險。</li>
+                    </ul>
+                </div>
+
+                <div class="knowledge-section">
+                    <h3>推薦水晶與應用</h3>
+                    <div class="card-grid">
+                        <div class="info-card">
+                            <h4>黃水晶</h4>
+                            <p>被稱為「財富之石」，能活化太陽神經叢脈輪，帶來積極的財富能量與企圖心。若個人的財帛宮較弱，可以透過配戴黃水晶來補足氣場。</p>
+                            <p><strong>風水佈局：</strong>在辦公桌的青龍位（左上方）擺放黃水晶樹，以形成強力的聚財風水佈局。</p>
+                        </div>
+                        <div class="info-card">
+                            <h4>鈦晶 / 綠幽靈</h4>
+                            <p>對於追求強勢招財的人，<strong>鈦晶</strong>能同時招攬正財與偏財。而<strong>綠幽靈</strong>則能帶來事業上的正財，穩固財富基石。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Career -->
+            <div id="pane-career" class="knowledge-pane" style="--theme-color: #22c55e">
+                <h2 class="knowledge-title">事業與發展：官祿宮</h2>
+                <p class="knowledge-subtitle">事業的順遂與否與官祿宮息息相關，運用綠色與大地色系水晶強化領導力。</p>
+
+                <div class="knowledge-section">
+                    <h3>面相解析 (Face Reading)</h3>
+                    <p><strong>位置：</strong>官祿宮位於左前額的中央部（上至髮際線，下至印堂）。</p>
+                    <ul>
+                        <li>這個部位若寬闊明亮，主掌個人的事業運與官運，代表事業順利。</li>
+                        <li>若有凹陷或疤痕，可能暗示事業發展較易遇到阻礙。</li>
+                    </ul>
+                </div>
+
+                <div class="knowledge-section">
+                    <h3>推薦水晶與應用</h3>
+                    <div class="card-grid">
+                        <div class="info-card">
+                            <h4>綠幽靈</h4>
+                            <p>被公認為「事業水晶」，有助於帶來正財運，吸引事業上的機會與貴人，並能有效化解職場與事業上的瓶頸。</p>
+                        </div>
+                        <div class="info-card">
+                            <h4>虎眼石</h4>
+                            <p>能增強膽識、果斷力與領導力，使人在面對重大決策時更加堅定，有助於事業貫徹始終，特別適合創業者或主管階級。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stress -->
+            <div id="pane-stress" class="knowledge-pane" style="--theme-color: #0ea5e9">
+                <h2 class="knowledge-title">壓力與健康：命宮與疾厄宮</h2>
+                <p class="knowledge-subtitle">長期高壓會反映在眉眼之間，使用療癒系水晶放鬆緊繃的神經。</p>
+
+                <div class="knowledge-section">
+                    <h3>面相解析 (Face Reading)</h3>
+                    <p><strong>位置：</strong>命宮位於兩眉之間的印堂部位，疾厄宮則在山根（兩眼中間的鼻樑）。</p>
+                    <ul>
+                        <li>當人長期處於高壓狀態時，命宮容易出現「懸針紋」（直立的皺紋）。</li>
+                        <li>面相學認為這會導致神經衰弱、個性偏激或極度勞碌。</li>
+                    </ul>
+                </div>
+
+                <div class="knowledge-section">
+                    <h3>推薦水晶與應用</h3>
+                    <div class="card-grid">
+                        <div class="info-card">
+                            <h4>紫水晶 / 茶晶</h4>
+                            <p><strong>紫水晶</strong>能平穩心緒、安神鎮定，適合長期用腦、神經緊繃的人配戴。<strong>茶晶</strong>則具備極強的吸收濁氣與穩定情緒功能，能過濾負面能量，減輕焦慮感。</p>
+                        </div>
+                        <div class="info-card safe-card">
+                            <h4>💆 實用建議：水晶滾輪</h4>
+                            <p>針對命宮與面部緊繃，可使用天然玉石或紫水晶製成的「美容滾輪」來按摩臉部與額頭，能有效促進臉部血液循環、舒緩肌肉緊張，並減少皺紋的深化。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Social -->
+            <div id="pane-social" class="knowledge-pane" style="--theme-color: #8b5cf6">
+                <h2 class="knowledge-title">社交與人際：兄弟宮與奴僕宮</h2>
+                <p class="knowledge-subtitle">好人緣與貴人運是成功的關鍵，透過喉輪與頂輪水晶開啟溝通的大門。</p>
+
+                <div class="knowledge-section">
+                    <h3>面相解析 (Face Reading)</h3>
+                    <p><strong>位置：</strong></p>
+                    <ul>
+                        <li><strong>兄弟宮：</strong>位於兩條眉毛的位置，看平輩與朋友間的助力。</li>
+                        <li><strong>奴僕宮：</strong>位於下巴的左右面頰與兩腮的內側，代表與晚輩、下屬及一般人際網絡的關係。</li>
+                    </ul>
+                </div>
+
+                <div class="knowledge-section">
+                    <h3>推薦水晶與應用</h3>
+                    <div class="card-grid">
+                        <div class="info-card">
+                            <h4>紫水晶</h4>
+                            <p>在此處被視為極佳的「社交石」。它屬於內斂型的引導，能激發機智與聰慧的形象，藉由提升內在氣質來吸引「貴人」相助，而不是單純的桃花。</p>
+                        </div>
+                        <div class="info-card">
+                            <h4>海藍寶</h4>
+                            <p>對應喉輪，能強化溝通能量與表達力，增進說服力，有助於化解人際交往中的誤會，非常適合需要頻繁社交、談判或領導團隊的人。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+    </div>
+</Layout>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const tabButtons = document.querySelectorAll('.knowledge-tab');
+        const tabPanes = document.querySelectorAll('.knowledge-pane');
+
+        function activateTab(targetId) {
+            tabButtons.forEach(btn => btn.classList.remove('active'));
+            tabPanes.forEach(pane => pane.classList.remove('active'));
+
+            const targetBtn = document.querySelector(`.knowledge-tab[data-target="${targetId}"]`);
+            const targetPane = document.getElementById(`pane-${targetId}`);
+
+            if (targetBtn && targetPane) {
+                targetBtn.classList.add('active');
+                targetPane.classList.add('active');
+            }
+        }
+
+        // Handle clicks
+        tabButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const targetId = button.getAttribute('data-target');
+                if (targetId) {
+                    activateTab(targetId);
+                    history.pushState(null, null, '#' + targetId);
+                }
+            });
+        });
+
+        // Handle initial load with hash
+        if (window.location.hash) {
+            const hash = window.location.hash.substring(1);
+            if (document.getElementById(`pane-${hash}`)) {
+                activateTab(hash);
+            }
+        }
+
+        // Handle hash changes (e.g. from navbar)
+        window.addEventListener('hashchange', () => {
+            const hash = window.location.hash.substring(1);
+            if (document.getElementById(`pane-${hash}`)) {
+                activateTab(hash);
+            }
+        });
+    });
+</script>
