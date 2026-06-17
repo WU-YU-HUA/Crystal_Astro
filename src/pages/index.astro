@@ -1,89 +1,120 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import "../css/horoscope.css";
+import "../css/horoscope.css"; 
 
 const res = await fetch(
-	"https://e-closet-backend-931017863616.us-east1.run.app/api/agent/daily_horoscope/",
+    "https://e-closet-backend-931017863616.us-east1.run.app/api/agent/daily_horoscope/",
 );
 const data = await res.json();
-
 const horo_list = data?.result || [];
+
+// 建立星座日期對照表 (如果想換成英文，可直接將值改為 Aries, Taurus 等)
+const zodiacInfo: Record<string, string> = {
+    "牡羊座": "3/21~4/19",
+    "金牛座": "4/20~5/20",
+    "雙子座": "5/21~6/21",
+    "巨蟹座": "6/22~7/22",
+    "獅子座": "7/23~8/22",
+    "處女座": "8/23~9/22",
+    "天秤座": "9/23~10/23",
+    "天蠍座": "10/24~11/22",
+    "射手座": "11/23~12/21",
+    "摩羯座": "12/22~1/19",
+    "水瓶座": "1/20~2/18",
+    "雙魚座": "2/19~3/20"
+};
 ---
 
-<Layout title="Crystal Tutorial">
-	<div id="container">
-		<main>
-			<div class="horoscope-list">
-				<h2>星座運勢總覽</h2>
-				{
-					horo_list.map((item: any) => (
-						<div class="zodiac-card">
-							<h3>{item.Zodiac}</h3>
-							<h4>
-								今日幸運色: {item.LuckColor.Color}
-								<span
-									style={{
-										backgroundColor: item.LuckColor.Hex,
-										padding: "2px 8px",
-										borderRadius: "4px",
-										marginLeft: "4px",
-									}}
-								/>
-							</h4>
-							<p>{item.Overall.Desc}</p>
-						</div>
-					))
-				}
-			</div>
-		</main>
-	</div>
+<Layout title="今日星座運勢 | Crystal Astro">
+    <div class="horoscope-container">
+        <aside class="tabs-sidebar">
+            {
+                horo_list.map((item: any, index: number) => (
+                    <button
+                        class={`tab-button ${index === 0 ? 'active' : ''}`}
+                        data-target={`zodiac-${index}`}
+                        style={`--theme-color: ${item.LuckColor.Hex}`}
+                    >
+                        {item.Zodiac} 
+                        <span class="tab-subtitle">({zodiacInfo[item.Zodiac]})</span>
+                    </button>
+                ))
+            }
+        </aside>
+
+        <main class="tab-content-container">
+            {
+                horo_list.map((item: any, index: number) => (
+                    <div
+                        id={`pane-zodiac-${index}`}
+                        class={`tab-pane ${index === 0 ? 'active' : ''}`}
+                        style={`--theme-color: ${item.LuckColor.Hex}`}
+                    >
+                        <h2 class="horoscope-title">{item.Zodiac} 今日運勢</h2>
+                        <div class="horoscope-subtitle">
+                            今日幸運色：{item.LuckColor.Color}
+                            <span class="color-dot" style={`background-color: ${item.LuckColor.Hex};`} />
+                        </div>
+
+                        <div class="horoscope-section">
+                            <h3>整體運勢 (指數：{item.Overall.Score}/10)</h3>
+                            <p>{item.Overall.Desc}</p>
+                        </div>
+
+                        <div class="horoscope-section">
+                            <h3>各項運勢解析</h3>
+                            <ul class="analysis-list">
+                                <li>
+                                    <strong>💖 愛情 (指數：{item.Love.Score}/10)</strong>
+                                    <p>{item.Love.Desc}</p>
+                                </li>
+                                <li>
+                                    <strong>💼 事業 (指數：{item.Career.Score}/10)</strong>
+                                    <p>{item.Career.Desc}</p>
+                                </li>
+                                <li>
+                                    <strong>💰 財富 (指數：{item.Wealth.Score}/10)</strong>
+                                    <p>{item.Wealth.Desc}</p>
+                                </li>
+                                <li>
+                                    <strong>💪 健康 (指數：{item.Health.Score}/10)</strong>
+                                    <p>{item.Health.Desc}</p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                ))
+            }
+        </main>
+    </div>
 </Layout>
 
-<style>
-	main {
-		color: #ffffff;
-		height: 100%;
-		display: flex;
-		justify-content: center;
-	}
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const tabButtons = document.querySelectorAll('.tab-button');
+        const tabPanes = document.querySelectorAll('.tab-pane');
 
-	#container {
-		font-family:
-			Inter, Roboto, "Helvetica Neue", "Arial Nova", "Nimbus Sans", Arial,
-			sans-serif;
-		height: 100%;
-	}
+        function activateTab(targetId: string | null) {
+            if (!targetId) return;
+            
+            tabButtons.forEach(btn => btn.classList.remove('active'));
+            tabPanes.forEach(pane => pane.classList.remove('active'));
 
-	@media screen and (max-height: 368px) {
-		#vendor {
-			display: none;
-		}
-	}
+            const targetBtn = document.querySelector(`.tab-button[data-target="${targetId}"]`);
+            const targetPane = document.getElementById(`pane-${targetId}`);
 
-	@media screen and (max-width: 768px) {
-		#container {
-			display: flex;
-			flex-direction: column;
-		}
+            if (targetBtn && targetPane) {
+                targetBtn.classList.add('active');
+                targetPane.classList.add('active');
+            }
+        }
 
-		#hero {
-			display: block;
-			padding-top: 10%;
-		}
-
-		#links {
-			flex-wrap: wrap;
-		}
-
-		#links a.button {
-			padding: 14px 18px;
-		}
-
-		#vendor {
-			right: 16px;
-			left: 16px;
-			bottom: 2.5rem;
-			max-width: 100%;
-		}
-	}
-</style>
+        // 點擊切換
+        tabButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const targetId = button.getAttribute('data-target');
+                activateTab(targetId);
+            });
+        });
+    });
+</script>

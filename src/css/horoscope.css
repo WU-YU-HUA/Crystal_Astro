@@ -1,34 +1,197 @@
-main h2 {
-    color: #b388ff;
+/* 整體容器排版 */
+.horoscope-container {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 2rem;
+    display: flex;
+    gap: 2rem;
+    font-family: Inter, Roboto, 'Helvetica Neue', Arial, sans-serif;
+    color: #e0e0e0;
+}
+
+/* ================= 左側側邊欄 (完美移植 crystals.css) ================= */
+.tabs-sidebar {
+    flex: 0 0 250px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    border-right: 1px solid #333;
+    padding-right: 1rem;
+}
+
+.tab-button {
+    background: transparent;
+    border: 1px solid transparent;
+    color: #999;
+    padding: 1rem 1.5rem;
+    text-align: left;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-radius: 4px;
+    position: relative;
+    overflow: hidden;
+}
+
+.tab-button:hover {
+    color: var(--theme-color, #b388ff);
+    background: color-mix(in srgb, var(--theme-color, #b388ff) 15%, transparent);
+}
+
+.tab-button.active {
+    color: var(--theme-color, #b388ff);
+    border: 1px solid var(--theme-color, #b388ff);
+    background: color-mix(in srgb, var(--theme-color, #b388ff) 20%, transparent);
+    box-shadow: 0 0 10px color-mix(in srgb, var(--theme-color, #b388ff) 20%, transparent), 
+                inset 0 0 10px color-mix(in srgb, var(--theme-color, #b388ff) 10%, transparent);
+}
+
+.tab-button.active::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: var(--theme-color, #b388ff);
+    box-shadow: 0 0 8px var(--theme-color, #b388ff);
+}
+
+/* ================= 右側內容區 ================= */
+.tab-content-container {
+    flex: 1;
+    min-height: 500px;
+    background: #111;
+    border: 1px solid #222;
+    border-radius: 8px;
+    padding: 2.5rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    position: relative;
+}
+
+.tab-pane {
+    display: none;
+    animation: fadeIn 0.4s ease-out forwards;
+}
+
+.tab-pane.active {
+    display: block;
+    /* 背景微光暈效果 */
+    background: radial-gradient(circle at center, color-mix(in srgb, var(--theme-color, #b388ff) 5%, transparent) 0%, transparent 70%);
+    border-radius: 8px;
+    margin: -2.5rem;
+    padding: 2.5rem;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* ================= 文字與內部排版 (融合你原本的設計) ================= */
+.horoscope-title {
+    color: var(--theme-color, #b388ff);
     font-size: 2.5rem;
-    font-weight: 700; /*字體粗度*/
-    text-align: center;
-    margin-bottom: 1rem;
-    /* 增加紫色發光效果，營造星雲感 */ 
-    text-shadow: 0 0 15px #b388ff99; 
+    font-weight: 700;
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+    text-shadow: 0 0 15px color-mix(in srgb, var(--theme-color, #b388ff) 60%, transparent);
     letter-spacing: 2px;
 }
-main h3 {
+
+.horoscope-subtitle {
+    color: #888;
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+    font-style: italic;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border-bottom: 1px solid #333;
+    padding-bottom: 1rem;
+}
+
+.color-dot {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    box-shadow: 0 0 6px var(--theme-color, #fff);
+}
+
+.horoscope-section {
+    margin-bottom: 2rem;
+}
+
+.horoscope-section h3 {
     color: #ffd700; /* 金色，象徵恆星與能量 */
-    font-size: 1.8rem;
-    margin-bottom: 0.5rem;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #333;
     display: flex;
     align-items: center;
     gap: 10px;
 }
-main h3::before {
+
+.horoscope-section h3::before {
     content: "✦";
-    color: #b388ff;
+    color: var(--theme-color, #b388ff);
     font-size: 1.2rem;
+    text-shadow: 0 0 8px var(--theme-color, #b388ff);
 }
-main h4 {
-    color: #a2c0ff; /* 月光藍 */
-    font-size: 1.2rem;
-    text-shadow: 0 0 10px #a2c0ff80;
-}
-main p {
+
+.horoscope-section p {
     color: #e0e0e0; /* 接近白的淺灰，提升閱讀舒適度 */
     line-height: 1.8;
     font-size: 1.05rem;
     font-weight: 300;
+}
+
+.analysis-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.analysis-list li {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.analysis-list strong {
+    color: #a2c0ff; /* 月光藍 */
+    font-size: 1.2rem;
+    text-shadow: 0 0 10px #a2c0ff80;
+}
+
+/* ================= RWD 手機版適配 ================= */
+@media screen and (max-width: 768px) {
+    .horoscope-container {
+        flex-direction: column;
+        padding: 0 1rem;
+    }
+    
+    .tabs-sidebar {
+        flex: none;
+        flex-direction: row;
+        overflow-x: auto;
+        border-right: none;
+        border-bottom: 1px solid #333;
+        padding-right: 0;
+        padding-bottom: 1rem;
+        white-space: nowrap;
+    }
+    
+    .tab-button.active::before {
+        width: 100%;
+        height: 4px;
+        top: auto;
+        bottom: 0;
+        left: 0;
+    }
 }
