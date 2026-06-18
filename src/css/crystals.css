@@ -1,4 +1,4 @@
-/* Razer-style styling for crystals page */
+@import url('light.css');
 
 .crystals-container {
     max-width: 1200px;
@@ -161,5 +161,45 @@
         top: auto;
         bottom: 0;
         left: 0;
+    }
+}
+
+/* ================= 明亮模式 (Light Mode) ================= */
+[data-theme="light"] .crystals-container {
+    color: #222;
+}
+
+[data-theme="light"] .tabs-sidebar {
+    border-color: #e5e5e5;
+}
+
+[data-theme="light"] .tab-button {
+    color: #666;
+}
+
+[data-theme="light"] .tab-content-container {
+    background: #ffffff;
+    border-color: #e5e5e5;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+}
+
+[data-theme="light"] .crystal-alias {
+    color: #666;
+}
+
+[data-theme="light"] .crystal-section h3 {
+    color: #111;
+    border-color: #e5e5e5;
+}
+
+[data-theme="light"] .crystal-section p,
+[data-theme="light"] .crystal-section ul {
+    color: #444;
+}
+
+/* RWD 明亮模式邊框適配 */
+@media screen and (max-width: 768px) {
+    [data-theme="light"] .tabs-sidebar {
+        border-bottom-color: #e5e5e5;
     }
 }

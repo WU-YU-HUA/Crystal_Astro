@@ -2,7 +2,6 @@
 
 ---
 
-<!--懸浮超連結框-->
 <a
     href="https://myship.7-11.com.tw/general/detail/GM2601272856786"
     id="vendor"
@@ -22,6 +21,7 @@
 </a>
 
 <style>
+    /* ================= 維持原本的樣式 (深色模式預設) ================= */
     #vendor {
         position: fixed;
         bottom: 16px;
@@ -42,6 +42,7 @@
         background: rgba(255, 255, 255, 0.9);
         border-radius: 16px;
         border: 1px solid white;
+        transition: background-color 0.3s ease, border-color 0.3s ease; /* 加上過渡動畫 */
     }
 
     a h2 {
@@ -57,5 +58,19 @@
         line-height: 24px;
         letter-spacing: -0.006em;
         margin: 0;
+    }
+
+    /* ================= 明亮模式的樣式 (變成灰底) ================= */
+    :global([data-theme="light"]) .box {
+        background: rgba(235, 235, 240, 0.85); /* 換成偏灰色的底 */
+        border-color: rgba(0, 0, 0, 0.08);     /* 邊框變暗一點 */
+    }
+
+    :global([data-theme="light"]) #vendor {
+        border-color: rgba(0, 0, 0, 0.08);
+    }
+
+    :global([data-theme="light"]) #vendor:hover {
+        background: rgba(220, 220, 225, 0.95); /* 滑鼠移過去變深灰 */
     }
 </style>

@@ -1,3 +1,4 @@
+@import url('light.css');
 /* 整體容器排版 */
 .horoscope-container {
     max-width: 1200px;
@@ -193,5 +194,49 @@
         top: auto;
         bottom: 0;
         left: 0;
+    }
+}
+
+/* ================= 明亮模式 (Light Mode) ================= */
+[data-theme="light"] .horoscope-container {
+    color: #222;
+}
+
+[data-theme="light"] .tabs-sidebar {
+    border-color: #e5e5e5;
+}
+
+[data-theme="light"] .tab-button {
+    color: #666;
+}
+
+[data-theme="light"] .tab-content-container {
+    background: #ffffff;
+    border-color: #e5e5e5;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+}
+
+[data-theme="light"] .horoscope-subtitle {
+    color: #666;
+    border-color: #e5e5e5;
+}
+
+[data-theme="light"] .horoscope-section h3 {
+    color: #b8860b; /* 稍微加深的金色，在白底上更清晰 */
+    border-color: #e5e5e5;
+}
+
+[data-theme="light"] .horoscope-section p {
+    color: #444; /* 深灰色提升白底閱讀性 */
+}
+
+[data-theme="light"] .analysis-list strong {
+    color: #2b6cb0; /* 將月光藍調深一點，確保白底對比度 */
+}
+
+/* RWD 明亮模式邊框適配 */
+@media screen and (max-width: 768px) {
+    [data-theme="light"] .tabs-sidebar {
+        border-bottom-color: #e5e5e5;
     }
 }

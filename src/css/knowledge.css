@@ -1,4 +1,4 @@
-/* Razer-style styling for knowledge page, adapting from crystals.css */
+@import url('light.css');
 
 .knowledge-container {
     max-width: 1200px;
@@ -304,5 +304,89 @@
         top: auto;
         bottom: 0;
         left: 0;
+    }
+}
+
+/* ================= 明亮模式 (Light Mode) ================= */
+[data-theme="light"] .knowledge-container {
+    color: #222;
+}
+
+[data-theme="light"] .knowledge-sidebar {
+    border-color: #e5e5e5;
+}
+
+[data-theme="light"] .knowledge-tab {
+    color: #666;
+}
+
+[data-theme="light"] .knowledge-content-container {
+    background: #ffffff;
+    border-color: #e5e5e5;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+}
+
+[data-theme="light"] .knowledge-subtitle {
+    color: #666;
+}
+
+[data-theme="light"] .knowledge-section h3 {
+    color: #111;
+    border-color: #e5e5e5;
+}
+
+[data-theme="light"] .knowledge-section p,
+[data-theme="light"] .knowledge-section ul,
+[data-theme="light"] .knowledge-section ol {
+    color: #444;
+}
+
+/* 資訊卡片明亮模式 */
+[data-theme="light"] .info-card {
+    background: #f9f9f9;
+    border-color: #e5e5e5;
+}
+
+[data-theme="light"] .warning-card {
+    border-color: #ffcccc;
+}
+[data-theme="light"] .safe-card {
+    border-color: #ccffcc;
+}
+
+/* 表格明亮模式 */
+[data-theme="light"] .knowledge-table {
+    background: #ffffff;
+    border: 1px solid #e5e5e5;
+}
+
+[data-theme="light"] .knowledge-table th {
+    background: #f5f5f7;
+    color: #111;
+    border-bottom: 2px solid #e5e5e5;
+}
+
+[data-theme="light"] .knowledge-table td {
+    border-bottom-color: #e5e5e5;
+}
+
+[data-theme="light"] .knowledge-table tr:hover {
+    background: rgba(68, 214, 44, 0.1); /* 稍微加深一點點 hover 效果 */
+}
+
+[data-theme="light"] .knowledge-table td.danger {
+    color: #d32f2f; /* 讓紅字在白底上更清晰 */
+}
+
+/* 數字列表明亮模式 */
+[data-theme="light"] .number-list li {
+    background: #f9f9f9;
+    border-color: #e5e5e5;
+}
+
+/* RWD 明亮模式邊框適配 */
+@media screen and (max-width: 768px) {
+    [data-theme="light"] .knowledge-sidebar {
+        border-bottom-color: #e5e5e5;
     }
 }

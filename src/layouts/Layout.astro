@@ -1,10 +1,9 @@
 ---
-// 1. 引入你的 Navbar 組件
 import Navbar from '../components/Navbar.astro';
 import VendorBox from '../components/Vendor_box.astro';
-// import CSS
+
 interface Props {
-	title?: string;
+    title?: string;
 }
 
 const { title = "Crystal Astro" } = Astro.props;
@@ -12,32 +11,52 @@ const { title = "Crystal Astro" } = Astro.props;
 
 <!doctype html>
 <html lang="zh-Hant">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<title>{title}</title>
-	</head>
-	<body>
-		<Navbar /> 
-		<!--確保Navbar一定在最上面
-		可以套用到所有用LayOut標籤的頁面上
-		-->
-		<main> <!--底下為Page main-->
-			<slot />
-		</main>
-		<VendorBox />
-	</body>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width" />
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <meta name="generator" content={Astro.generator} />
+        <title>{title}</title>
+
+        <script is:inline>
+            const theme = localStorage.getItem('theme') || 'dark';
+            if (theme === 'light') {
+                document.documentElement.setAttribute('data-theme', 'light');
+            }
+        </script>
+    </head>
+    <body>
+        <Navbar /> 
+        
+        <main>
+            <slot />
+        </main>
+        
+        <VendorBox />
+    </body>
 </html>
 
-<style>
-	html, body {
-		margin: 0;
-		padding: 0;
-		width: 100%;
-		min-height: 100%;
-		background-color: #181818; /* Razer 風格預設黑底 */
-		color: white;
-	}
+<style is:global>
+    /* ================= 全域主題變數 ================= */
+    :root {
+        --bg-global: #181818;
+        --text-main: white;
+    }
+
+    [data-theme="light"] {
+        --bg-global: #f5f5f7;
+        --text-main: #222222;
+    }
+
+    /* ================= 基礎全域樣式 ================= */
+    html, body {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        min-height: 100%;
+        background-color: var(--bg-global); 
+        color: var(--text-main);            
+        transition: background-color 0.3s ease, color 0.3s ease; 
+        font-family: Inter, Roboto, 'Helvetica Neue', Arial, sans-serif;
+    }
 </style>

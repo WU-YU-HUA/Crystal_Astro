@@ -4,51 +4,78 @@
 <nav class="navbar">
   <div class="nav-links">
     <a href="/" class="nav-item">首頁</a>
-
     <a href="/crystals" class="nav-item">水晶</a>
-
     <a href="/knowledge" class="nav-item">水晶知識</a>
-
     <a href="/energy" class="nav-item">能量面相</a>
+  </div>
+
+  <div class="theme-switch-wrapper">
+    <label class="theme-switch" for="checkbox-theme">
+        <input type="checkbox" id="checkbox-theme" />
+        <div class="slider round">
+            <span class="icon sun">☀️</span>
+            <span class="icon moon">🌙</span>
+        </div>
+    </label>
   </div>
 </nav>
 
 <style>
+  /* ================= Navbar 主題變數 ================= */
+  :global(:root) {
+    --nav-bg: #000000;
+    --nav-text: #ffffff;
+    --nav-link-color: #999999;
+    --nav-dropdown-bg: #2d2a2af2;
+    --nav-border-hover: #44d62c; /* 原本的 Razer 綠色 */
+  }
+
+  :global([data-theme="light"]) {
+    --nav-bg: #ffffff;
+    --nav-text: #222222;
+    --nav-link-color: #666666;
+    --nav-dropdown-bg: rgba(245, 245, 247, 0.95);
+    /* 綠色在淺色模式也很好看，所以保留。若你想換顏色可改這裡 */
+  }
+
+  /* ================= 導覽列核心樣式 ================= */
   .navbar {
-    background: #000;
-    color: #fff;
+    background: var(--nav-bg);
+    color: var(--nav-text);
     display: flex;
     justify-content: center;
-    /* 移除原本的 padding: 1rem，改由子元素撐開，防止感應斷層 */
+    align-items: center;
     height: 60px; 
     position: sticky;
     top: 0;
     z-index: 1000;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    border-bottom: 1px solid color-mix(in srgb, var(--nav-text) 10%, transparent); /* 增加細微底線增加立體感 */
   }
 
   .nav-links { 
     display: flex; 
-    gap: 0; /* 改用 padding 控制間距，感應區才不會有縫隙 */
+    gap: 0; 
     height: 100%; 
-    align-items: stretch; /* 讓子元素填滿高度 */
+    align-items: stretch; 
   }
 
   .nav-item { 
-    color: #999; 
+    color: var(--nav-link-color); 
     cursor: pointer; 
     text-decoration: none;
     display: flex;
     align-items: center;
-    padding: 0 1.5rem; /* 增加左右點擊範圍 */
-    height: 100%;    /* 撐滿整個 Bar 的高度 */
+    padding: 0 1.5rem; 
+    height: 100%;    
     transition: color 0.2s;
   }
 
   .nav-item:hover { 
-    color: #44d62c; 
+    color: var(--nav-border-hover); 
   } 
 
-  /* 下拉選單核心邏輯 */
+  /* ================= 下拉選單邏輯 ================= */
   .has-dropdown { 
     position: static; 
     display: flex;
@@ -58,31 +85,135 @@
   .dropdown-content {
     display: none;
     position: absolute;
-    top: 60px; /* 精準等於高度，確保無縫 */
+    top: 60px; 
     left: 0;
     width: 100%;
-    background: #2d2a2af2; /* 保留你的顏色 */
+    background: var(--nav-dropdown-bg); 
     padding: 2rem 0;
-    border-top: 1px solid #44d62c;
+    border-top: 1px solid var(--nav-border-hover);
+    transition: background-color 0.3s ease;
   }
 
-  /* 當滑鼠在整個區域（包含下拉內容）時，保持顯示 */
   .has-dropdown:hover .dropdown-content {
     display: block; 
   }
   
-  /* 這樣寫會更精準，只管 dropdown 裡面的連結 */
   .dropdown-content a {
-    color: #fff;
+    color: var(--nav-text);
     text-decoration: none;
     font-size: 14px;
     transition: color 0.2s ease;
   }
 
   .dropdown-content a:hover {
-    color: #44d62c;
+    color: var(--nav-border-hover);
   }
 
   .container { max-width: 1200px; margin: 0 auto; }
   ul { list-style: none; display: flex; gap: 3rem; margin: 0; padding: 0; }
+
+  /* ================= Switch 開關樣式 ================= */
+  .theme-switch-wrapper {
+    position: absolute;
+    right: 2rem; /* 讓開關固定在導覽列右側 */
+    display: flex;
+    align-items: center;
+    height: 100%;
+  }
+
+  .theme-switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 30px;
+  }
+
+  .theme-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #333333; 
+    transition: 0.4s;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 6px;
+    box-sizing: border-box;
+  }
+
+  .slider.round {
+    border-radius: 30px;
+  }
+
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 22px;
+    width: 22px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white; 
+    transition: 0.4s;
+    border-radius: 50%;
+    z-index: 2;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  }
+
+  input:checked + .slider {
+    background-color: #e5e5e5;
+  }
+
+  input:checked + .slider:before {
+    transform: translateX(30px);
+    background-color: #222222;
+  }
+
+  .icon {
+    font-size: 14px;
+    z-index: 1;
+    user-select: none;
+  }
+
+  /* 手機版微調：如果螢幕太小，把開關距離縮小一點 */
+  @media screen and (max-width: 768px) {
+      .theme-switch-wrapper {
+          right: 1rem;
+      }
+      .nav-item {
+          padding: 0 0.8rem; /* 手機版導覽列稍微緊湊一點 */
+      }
+  }
 </style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+      const toggleSwitch = document.getElementById('checkbox-theme') as HTMLInputElement | null;
+      
+      // 讀取目前的模式來設定 Switch 的初始狀態
+      const currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
+      if (currentTheme === 'light' && toggleSwitch) {
+          toggleSwitch.checked = true;
+      }
+
+      // 監聽 Switch 切換事件
+      toggleSwitch?.addEventListener('change', (e) => {
+          const target = e.target as HTMLInputElement;
+          if (target.checked) {
+              document.documentElement.setAttribute('data-theme', 'light');
+              localStorage.setItem('theme', 'light');
+          } else {
+              document.documentElement.removeAttribute('data-theme');
+              localStorage.setItem('theme', 'dark');
+          }
+      });
+  });
+</script>

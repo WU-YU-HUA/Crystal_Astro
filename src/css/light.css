@@ -1,0 +1,23 @@
+/* ================= 終極明亮模式：自動對比度調整 (保留色相，自動加深) ================= */
+[data-theme="light"] .crystal-title,
+[data-theme="light"] .horoscope-title,
+[data-theme="light"] .knowledge-title {
+    /* 將原本顏色與深灰色混合，白字會自動變灰字，紫字會變深紫字，確保白底絕對清晰 */
+    color: color-mix(in srgb, var(--theme-color) 50%, #222) !important;
+    text-shadow: none !important;
+}
+
+[data-theme="light"] .tab-button.active,
+[data-theme="light"] .knowledge-tab.active {
+    color: color-mix(in srgb, var(--theme-color) 40%, #222) !important;
+    border-color: color-mix(in srgb, var(--theme-color) 40%, #ccc) !important;
+    background: #f9f9f9 !important; /* 統一用極淺灰底，讓所有選取框看起來乾淨一致 */
+    box-shadow: none !important;
+}
+
+[data-theme="light"] .tab-button.active::before,
+[data-theme="light"] .knowledge-tab.active::before {
+    /* 左側亮條：將原本顏色與中灰色混合，白水晶會變銀灰邊條，紫水晶會變深紫邊條 */
+    background: color-mix(in srgb, var(--theme-color) 50%, #888) !important;
+    box-shadow: none !important;
+}
