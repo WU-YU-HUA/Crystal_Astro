@@ -32,8 +32,18 @@ const chapters = [
 
 <Layout title="水晶知識與指南 | Crystal Astro">
     <div class="knowledge-container">
+
+        <!-- 🔥 加入初始 style 讓第一個選單顏色生效 -->
+        <div class="mobile-dropdown-toggle" id="mobileToggle" style={`--theme-color: ${chapters[0].color}`}>
+            <!-- 預設顯示第一筆資料 -->
+            <span id="mobileToggleText">{chapters[0].title}</span>
+            <svg style="transition: transform 0.3s ease;" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+        </div>
+
         <!-- Sidebar Tabs -->
-        <aside class="knowledge-sidebar">
+        <aside class="knowledge-sidebar" id="knowledgeSidebar">
             {chapters.map((chapter, index) => (
                 <button 
                     class={`knowledge-tab ${index === 0 ? 'active' : ''}`}
@@ -371,16 +381,69 @@ const chapters = [
         const tabButtons = document.querySelectorAll('.knowledge-tab');
         const tabPanes = document.querySelectorAll('.knowledge-pane');
 
-        function activateTab(targetId) {
+        // 抓取手機版專用的 DOM 元素
+        const mobileToggle = document.getElementById('mobileToggle');
+        const knowledgeSidebar = document.getElementById('knowledgeSidebar');
+        const mobileToggleText = document.getElementById('mobileToggleText');
+
+        // ================= 手機版下拉選單開關邏輯 =================
+        mobileToggle?.addEventListener('click', (e) => {
+            e.stopPropagation();
+            knowledgeSidebar?.classList.toggle('show');
+            const svg = mobileToggle.querySelector('svg');
+            if (svg) {
+                svg.style.transform = knowledgeSidebar?.classList.contains('show') ? 'rotate(180deg)' : 'rotate(0deg)';
+            }
+        });
+
+        document.addEventListener('click', (e) => {
+            if (knowledgeSidebar?.classList.contains('show')) {
+                const target = e.target as Node;
+                if (!knowledgeSidebar.contains(target) && !mobileToggle?.contains(target)) {
+                    knowledgeSidebar.classList.remove('show');
+                    const svg = mobileToggle?.querySelector('svg');
+                    if (svg) svg.style.transform = 'rotate(0deg)';
+                }
+            }
+        });
+
+        // ================= Tab 切換邏輯 (整合手機版連動) =================
+        // 🐛 修正反紅問題：加上 TypeScript 的型別定義 (string | null)
+        function activateTab(targetId: string | null) {
+            if (!targetId) return; // 防呆機制，如果沒有抓到 ID 直接跳出
+
             tabButtons.forEach(btn => btn.classList.remove('active'));
             tabPanes.forEach(pane => pane.classList.remove('active'));
 
-            const targetBtn = document.querySelector(`.knowledge-tab[data-target="${targetId}"]`);
+            // 加上 as HTMLElement 讓 TypeScript 知道這是一個 HTML 元素
+            const targetBtn = document.querySelector(`.knowledge-tab[data-target="${targetId}"]`) as HTMLElement;
             const targetPane = document.getElementById(`pane-${targetId}`);
 
             if (targetBtn && targetPane) {
                 targetBtn.classList.add('active');
                 targetPane.classList.add('active');
+                
+                // 更新手機版開關顯示的文字
+                if (mobileToggleText) {
+                    mobileToggleText.textContent = targetBtn.textContent?.trim() || '';
+                }
+
+                // ==========================================
+                // 🔥 修正版：同步目前選單的顏色給上方 Toggle
+                // ==========================================
+                if (mobileToggle) {
+                    const newColor = getComputedStyle(targetBtn).getPropertyValue('--theme-color').trim();
+                    if (newColor) {
+                        mobileToggle.style.setProperty('--theme-color', newColor);
+                    }
+                }
+            }
+            
+            // 切換完成後，自動收合手機版選單
+            if (knowledgeSidebar?.classList.contains('show')) {
+                knowledgeSidebar.classList.remove('show');
+                const svg = mobileToggle?.querySelector('svg');
+                if (svg) svg.style.transform = 'rotate(0deg)';
             }
         }
 
@@ -390,7 +453,7 @@ const chapters = [
                 const targetId = button.getAttribute('data-target');
                 if (targetId) {
                     activateTab(targetId);
-                    history.pushState(null, null, '#' + targetId);
+                    history.pushState(null, '', '#' + targetId);
                 }
             });
         });

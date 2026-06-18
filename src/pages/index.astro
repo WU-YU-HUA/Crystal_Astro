@@ -27,7 +27,15 @@ const zodiacInfo: Record<string, string> = {
 
 <Layout title="今日星座運勢 | Crystal Astro">
     <div class="horoscope-container">
-        <aside class="tabs-sidebar">
+        
+        <div class="mobile-dropdown-toggle" id="mobileToggle" style={`--theme-color: ${horo_list[0] ? horo_list[0].LuckColor.Hex : '#b388ff'}`}>
+            <span id="mobileToggleText">{horo_list[0] ? horo_list[0].Zodiac : '選擇星座'}</span>
+            <svg style="transition: transform 0.3s ease;" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+        </div>
+
+        <aside class="tabs-sidebar" id="tabsSidebar">
             {
                 horo_list.map((item: any, index: number) => (
                     <button
@@ -93,23 +101,79 @@ const zodiacInfo: Record<string, string> = {
     document.addEventListener('DOMContentLoaded', () => {
         const tabButtons = document.querySelectorAll('.tab-button');
         const tabPanes = document.querySelectorAll('.tab-pane');
+        
+        // 抓取手機版專用的 DOM 元素
+        const mobileToggle = document.getElementById('mobileToggle');
+        const tabsSidebar = document.getElementById('tabsSidebar');
+        const mobileToggleText = document.getElementById('mobileToggleText');
 
+        // ================= 手機版下拉選單互動邏輯 =================
+        // 點擊開關展開/收合選單
+        mobileToggle?.addEventListener('click', (e) => {
+            e.stopPropagation(); // 阻止事件冒泡，避免觸發全域點擊關閉
+            tabsSidebar?.classList.toggle('show');
+            
+            // 處理箭頭旋轉動畫
+            const svg = mobileToggle.querySelector('svg');
+            if (svg) {
+                svg.style.transform = tabsSidebar?.classList.contains('show') ? 'rotate(180deg)' : 'rotate(0deg)';
+            }
+        });
+
+        // 點擊畫面其他空白處時，自動收合選單
+        document.addEventListener('click', (e) => {
+            if (tabsSidebar?.classList.contains('show')) {
+                const target = e.target as Node;
+                // 如果點擊的地方不在側邊欄內部，且不是開關按鈕，就收起選單
+                if (!tabsSidebar.contains(target) && !mobileToggle?.contains(target)) {
+                    tabsSidebar.classList.remove('show');
+                    const svg = mobileToggle?.querySelector('svg');
+                    if (svg) svg.style.transform = 'rotate(0deg)';
+                }
+            }
+        });
+
+        // ================= 原本的頁籤切換邏輯 + 擴充 =================
         function activateTab(targetId: string | null) {
             if (!targetId) return;
             
             tabButtons.forEach(btn => btn.classList.remove('active'));
             tabPanes.forEach(pane => pane.classList.remove('active'));
 
-            const targetBtn = document.querySelector(`.tab-button[data-target="${targetId}"]`);
+            const targetBtn = document.querySelector(`.tab-button[data-target="${targetId}"]`) as HTMLElement;
             const targetPane = document.getElementById(`pane-${targetId}`);
 
             if (targetBtn && targetPane) {
                 targetBtn.classList.add('active');
                 targetPane.classList.add('active');
+
+                // 當切換項目時，更新手機版開關顯示的文字
+                if (mobileToggleText) {
+                    // childNodes[0] 可以精準抓到最外層的純文字（例如 "牡羊座 "），避開內層 <span> 的日期
+                    mobileToggleText.textContent = targetBtn.childNodes[0].textContent?.trim() || '';
+                }
+
+                // ==========================================
+                // 🔥 修正版：抓取真正計算後的 theme-color 並同步給上方選單
+                // ==========================================
+                if (mobileToggle) {
+                    // 使用 getComputedStyle 來確實抓到按鈕目前的顏色
+                    const newColor = getComputedStyle(targetBtn).getPropertyValue('--theme-color').trim();
+                    if (newColor) {
+                        mobileToggle.style.setProperty('--theme-color', newColor);
+                    }
+                }
+            }
+
+            // 切換完成後，如果手機版選單是開啟的，就自動收合它
+            if (tabsSidebar?.classList.contains('show')) {
+                tabsSidebar.classList.remove('show');
+                const svg = mobileToggle?.querySelector('svg');
+                if (svg) svg.style.transform = 'rotate(0deg)';
             }
         }
 
-        // 點擊切換
+        // 綁定點擊切換事件
         tabButtons.forEach(button => {
             button.addEventListener('click', () => {
                 const targetId = button.getAttribute('data-target');

@@ -21,3 +21,25 @@
     background: color-mix(in srgb, var(--theme-color) 50%, #888) !important;
     box-shadow: none !important;
 }
+
+/* ================= 新增：手機版下拉選單明亮模式適配 ================= */
+[data-theme="light"] .mobile-dropdown-toggle {
+    background: #ffffff !important;
+    color: color-mix(in srgb, var(--theme-color) 70%, #222) !important;
+    border-color: #ccc !important;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05) !important;
+}
+
+[data-theme="light"] .tabs-sidebar,
+[data-theme="light"] .knowledge-sidebar {
+    background: #ffffff !important;
+    border-color: #ccc !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1) !important;
+}
+
+@media screen and (max-width: 768px) {
+    [data-theme="light"] .tab-button,
+    [data-theme="light"] .knowledge-tab {
+        border-bottom-color: #eee !important;
+    }
+}

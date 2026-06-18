@@ -38,8 +38,15 @@ const chapters = [
 
 <Layout title="能量面相 | Crystal Astro">
     <div class="knowledge-container">
-        <!-- Sidebar Tabs -->
-        <aside class="knowledge-sidebar">
+
+        <div class="mobile-dropdown-toggle" id="mobileToggle" style={`--theme-color: ${chapters[0].color}`}>
+            <span id="mobileToggleText">{chapters[0].title}</span>
+            <svg style="transition: transform 0.3s ease;" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+        </div>
+
+        <aside class="knowledge-sidebar" id="knowledgeSidebar">
             {chapters.map((chapter, index) => (
                 <button 
                     class={`knowledge-tab ${index === 0 ? 'active' : ''}`}
@@ -51,9 +58,7 @@ const chapters = [
             ))}
         </aside>
 
-        <!-- Content Area -->
         <main class="knowledge-content-container">
-            <!-- Love -->
             <div id="pane-love" class="knowledge-pane active" style="--theme-color: #ec4899">
                 <h2 class="knowledge-title">愛情與婚姻：夫妻宮</h2>
                 <p class="knowledge-subtitle">結合面相學中的「夫妻宮」與水晶能量學，提升自身魅力與感情和諧。</p>
@@ -83,7 +88,6 @@ const chapters = [
                 </div>
             </div>
 
-            <!-- Wealth -->
             <div id="pane-wealth" class="knowledge-pane" style="--theme-color: #eab308">
                 <h2 class="knowledge-title">財富運勢：財帛宮</h2>
                 <p class="knowledge-subtitle">觀察鼻子的財帛宮，透過強效招財水晶來補足財氣。</p>
@@ -113,7 +117,6 @@ const chapters = [
                 </div>
             </div>
 
-            <!-- Career -->
             <div id="pane-career" class="knowledge-pane" style="--theme-color: #22c55e">
                 <h2 class="knowledge-title">事業與發展：官祿宮</h2>
                 <p class="knowledge-subtitle">事業的順遂與否與官祿宮息息相關，運用綠色與大地色系水晶強化領導力。</p>
@@ -142,7 +145,6 @@ const chapters = [
                 </div>
             </div>
 
-            <!-- Stress -->
             <div id="pane-stress" class="knowledge-pane" style="--theme-color: #0ea5e9">
                 <h2 class="knowledge-title">壓力與健康：命宮與疾厄宮</h2>
                 <p class="knowledge-subtitle">長期高壓會反映在眉眼之間，使用療癒系水晶放鬆緊繃的神經。</p>
@@ -171,7 +173,6 @@ const chapters = [
                 </div>
             </div>
 
-            <!-- Social -->
             <div id="pane-social" class="knowledge-pane" style="--theme-color: #8b5cf6">
                 <h2 class="knowledge-title">社交與人際：兄弟宮與奴僕宮</h2>
                 <p class="knowledge-subtitle">好人緣與貴人運是成功的關鍵，透過喉輪與頂輪水晶開啟溝通的大門。</p>
@@ -208,17 +209,70 @@ const chapters = [
     document.addEventListener('DOMContentLoaded', () => {
         const tabButtons = document.querySelectorAll('.knowledge-tab');
         const tabPanes = document.querySelectorAll('.knowledge-pane');
+        
+        // 抓取手機版專用的 DOM 元素
+        const mobileToggle = document.getElementById('mobileToggle');
+        const knowledgeSidebar = document.getElementById('knowledgeSidebar');
+        const mobileToggleText = document.getElementById('mobileToggleText');
 
-        function activateTab(targetId) {
+        // ================= 手機版下拉選單開關邏輯 =================
+        mobileToggle?.addEventListener('click', (e) => {
+            e.stopPropagation();
+            knowledgeSidebar?.classList.toggle('show');
+            const svg = mobileToggle.querySelector('svg');
+            if (svg) {
+                svg.style.transform = knowledgeSidebar?.classList.contains('show') ? 'rotate(180deg)' : 'rotate(0deg)';
+            }
+        });
+
+        document.addEventListener('click', (e) => {
+            if (knowledgeSidebar?.classList.contains('show')) {
+                const target = e.target as Node;
+                if (!knowledgeSidebar.contains(target) && !mobileToggle?.contains(target)) {
+                    knowledgeSidebar.classList.remove('show');
+                    const svg = mobileToggle?.querySelector('svg');
+                    if (svg) svg.style.transform = 'rotate(0deg)';
+                }
+            }
+        });
+
+        // ================= Tab 切換邏輯 (整合手機版連動) =================
+        // 🐛 修正反紅問題：加上 TypeScript 的型別定義 (string | null)
+        function activateTab(targetId: string | null) {
+            if (!targetId) return; // 防呆機制，如果沒有抓到 ID 直接跳出
+
             tabButtons.forEach(btn => btn.classList.remove('active'));
             tabPanes.forEach(pane => pane.classList.remove('active'));
 
-            const targetBtn = document.querySelector(`.knowledge-tab[data-target="${targetId}"]`);
+            // 加上 as HTMLElement 讓 TypeScript 知道這是一個 HTML 元素
+            const targetBtn = document.querySelector(`.knowledge-tab[data-target="${targetId}"]`) as HTMLElement;
             const targetPane = document.getElementById(`pane-${targetId}`);
 
             if (targetBtn && targetPane) {
                 targetBtn.classList.add('active');
                 targetPane.classList.add('active');
+                
+                // 更新手機版開關顯示的文字
+                if (mobileToggleText) {
+                    mobileToggleText.textContent = targetBtn.textContent?.trim() || '';
+                }
+
+                // ==========================================
+                // 🔥 修正版：同步目前選單的顏色給上方 Toggle
+                // ==========================================
+                if (mobileToggle) {
+                    const newColor = getComputedStyle(targetBtn).getPropertyValue('--theme-color').trim();
+                    if (newColor) {
+                        mobileToggle.style.setProperty('--theme-color', newColor);
+                    }
+                }
+            }
+            
+            // 切換完成後，自動收合手機版選單
+            if (knowledgeSidebar?.classList.contains('show')) {
+                knowledgeSidebar.classList.remove('show');
+                const svg = mobileToggle?.querySelector('svg');
+                if (svg) svg.style.transform = 'rotate(0deg)';
             }
         }
 
@@ -228,7 +282,7 @@ const chapters = [
                 const targetId = button.getAttribute('data-target');
                 if (targetId) {
                     activateTab(targetId);
-                    history.pushState(null, null, '#' + targetId);
+                    history.pushState(null, '', '#' + targetId);
                 }
             });
         });

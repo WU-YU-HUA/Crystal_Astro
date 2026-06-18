@@ -73,4 +73,47 @@
     :global([data-theme="light"]) #vendor:hover {
         background: rgba(220, 220, 225, 0.95); /* 滑鼠移過去變深灰 */
     }
+/* ================= 手機版樣式 (圓形 + SVG + 換行短文字) ================= */
+@media (max-width: 768px) {
+    #vendor.box {
+        max-width: none;
+        width: 76px;        /* 設定固定寬度 */
+        height: 76px;       /* 設定固定高度 (寬高一致才會是正圓) */
+        border-radius: 50%; /* 變成完美的圓形 */
+        padding: 0;         /* 歸零 padding，交給 flexbox 來置中 */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 2px;           /* 微調圖示與文字的間距，讓視覺更緊湊 */
+        bottom: 20px;
+        right: 16px;
+    }
+
+    #vendor p {
+        display: none;      /* 隱藏長串的描述段落 */
+    }
+
+    #vendor h2 {
+        margin: 0;
+        font-size: 0;       /* 隱藏原本的長標題 */
+    }
+
+    /* 插入全新的兩行文字 */
+    #vendor h2::after {
+        content: "挑選水晶"; 
+        white-space: pre;      
+        font-size: 11px;    /* 稍微縮小字體，確保不會超出圓形邊界 */
+        font-weight: bold;
+        line-height: 1.2;
+        color: inherit;
+        text-align: center;
+    }
+
+    #vendor svg {
+        width: 24px;        /* 微調 SVG 大小，讓圓形內的比例更協調 */
+        height: 24px;
+        flex-shrink: 0;
+    }
+}
 </style>

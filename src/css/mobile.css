@@ -1,0 +1,22 @@
+/* ================= 手機版全域 / 共用樣式 ================= */
+@media (max-width: 768px) {
+    /* 側邊欄 / 下拉選單按鈕文字裁切修復 */
+    .tabs-sidebar .tab-button {
+        height: auto !important; 
+        min-height: 50px; 
+        padding: 12px 16px !important; 
+        line-height: 1.5 !important; 
+        white-space: normal; 
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap; 
+    }
+
+    .tabs-sidebar .tab-button .tab-subtitle {
+        margin-left: 8px;
+        line-height: 1.5;
+    }
+    
+    /* 日後其他全域的手機版樣式可以繼續加在底下 👇 */
+    
+}
